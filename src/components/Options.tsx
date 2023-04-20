@@ -13,7 +13,26 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
       <Input
         label="이름"
         placeholder="이름을 입력하세요."
+        initialValue={config.name}
         onChange={(e) => setConfig({ ...config, name: e.target.value })}
+      />
+      <Input
+        label="서버"
+        placeholder="서버를 입력하세요."
+        initialValue={config.server}
+        onChange={(e) => setConfig({ ...config, server: e.target.value })}
+      />
+      <Input
+        label="칭호"
+        placeholder="칭호를 입력하세요."
+        initialValue={config.title}
+        onChange={(e) => setConfig({ ...config, title: e.target.value })}
+      />
+      <Input
+        label="폰트"
+        placeholder="폰트 이름을 입력하세요."
+        initialValue={config.font}
+        onChange={(e) => setConfig({ ...config, font: e.target.value })}
       />
 
       <Radio.Group

@@ -5,14 +5,20 @@ import Canvas from './components/Canvas'
 import Options from './components/Options'
 
 export type Config = {
-  name: string
   color: 'black' | 'white'
+  font: string
+  name: string
+  server: string
+  title: string
 }
 
 function App() {
   const [config, setConfig] = useState<Config>({
-    name: '',
     color: 'black',
+    font: 'Noto Sans KR',
+    name: '초크',
+    server: '초코보',
+    title: '궁극의 전설',
   })
 
   return (
