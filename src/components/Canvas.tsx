@@ -70,7 +70,12 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         </Button>
       }
     >
-      <Stage ref={ref} width={sceneWidth} height={sceneHeight} style={{ borderRadius: 8, overflow: 'hidden' }}>
+      <Stage
+        ref={ref}
+        width={sceneWidth}
+        height={sceneHeight}
+        style={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8, overflow: 'hidden' }}
+      >
         <Layer>
           <Image image={image} x={-(sceneWidth / 2 - leftRectWidth / 2) + imageOffset} />
 

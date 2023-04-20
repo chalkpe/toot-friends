@@ -35,9 +35,10 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="주직업">
-          {jobs.map((job) =>
+          {jobs.map((job, index) =>
             job ? (
               <Image
+                key={job}
                 width="1.5rem"
                 preview={false}
                 alt={job}
@@ -45,7 +46,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
                 onClick={() => setConfig({ ...config, job })}
               />
             ) : (
-              <Divider type="vertical" />
+              <Divider key={index} type="vertical" />
             )
           )}
         </Form.Item>

@@ -44,4 +44,5 @@ export const jobs = [
   'blackmage',
   'summoner',
   'redmage',
+  'bluemage',
 ]
