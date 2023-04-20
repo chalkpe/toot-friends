@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import { Card, Container } from '@nextui-org/react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Canvas from './components/Canvas'
+import Options from './components/Options'
+
+export type Config = {
+  name: string
+  color: 'black' | 'white'
 }
 
-export default App;
+function App() {
+  const [config, setConfig] = useState<Config>({
+    name: '',
+    color: 'black',
+  })
+
+  return (
+    <Container css={{ padding: '$10' }}>
+      <Canvas config={config} />
+
+      <Card css={{ marginTop: '$10' }}>
+        <Card.Header>옵션</Card.Header>
+        <Card.Body>
+          <Options config={config} setConfig={setConfig} />
+        </Card.Body>
+      </Card>
+    </Container>
+  )
+}
+
+export default App
