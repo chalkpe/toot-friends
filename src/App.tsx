@@ -23,7 +23,9 @@ function App() {
 
   return (
     <Container css={{ padding: '$10' }}>
-      <Canvas config={config} />
+      <div style={{ borderRadius: 14, overflow: 'hidden' }}>
+        <Canvas config={config} />
+      </div>
 
       <Card css={{ marginTop: '$10' }}>
         <Card.Header>옵션</Card.Header>
