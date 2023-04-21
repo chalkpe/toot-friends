@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
-import { Button, Card, Divider, Form, Image, Input, Radio, Slider, Space, Upload } from 'antd'
+import { AutoComplete, Button, Card, Divider, Form, Image, Input, Radio, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, iconPrefix, jobs } from '../common'
+import { Config, iconPrefix, jobs, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -67,17 +67,23 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="캐릭터 정보">
-          <Space.Compact>
+          <Space.Compact style={{ width: '100%' }}>
             <Input
               value={config.name}
               onChange={(e) => setConfig({ ...config, name: e.target.value })}
               placeholder="닉네임"
             />
-            <Input
+            <AutoComplete
               value={config.server}
-              onChange={(e) => setConfig({ ...config, server: e.target.value })}
+              onChange={(server) => setConfig({ ...config, server })}
               placeholder="서버"
-              prefix="@"
+              options={servers.map((server) => ({
+                ...server,
+                options: server.options.map((o) => ({ label: o, value: o })),
+              }))}
+              filterOption={(inputValue, option) =>
+                option?.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
+              }
             />
             <Input
               value={config.title}

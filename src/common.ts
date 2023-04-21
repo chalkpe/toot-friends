@@ -48,3 +48,55 @@ export const jobs = [
   'redmage',
   'bluemage',
 ]
+
+export const servers = [
+  {
+    label: 'Korea',
+    options: ['카벙클', '초코보', '모그리', '톤베리', '펜리르']
+  },
+  {
+    label: 'Elemental',
+    options: ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Tonberry', 'Typhon'],
+  },
+  {
+    label: 'Gaia',
+    options: ['Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima'],
+  },
+  {
+    label: 'Mana',
+    options: ['Anima', 'Asura', 'Chocobo', 'Hades', 'Ixion', 'Masamune', 'Pandaemonium', 'Titan'],
+  },
+  {
+    label: 'Meteor',
+    options: ['Belias', 'Mandragora', 'Ramuh', 'Shinryu', 'Unicorn', 'Valefor', 'Yojimbo', 'Zeromus'],
+  },
+  {
+    label: 'Aether',
+    options: ['Adamantoise', 'Cactuar', 'Faerie', 'Gilgamesh', 'Jenova', 'Midgardsormr', 'Sargatanas', 'Siren'],
+  },
+  {
+    label: 'Crystal',
+    options: ['Balmung', 'Brynhildr', 'Coeurl', 'Diabolos', 'Goblin', 'Malboro', 'Mateus', 'Zalera'],
+  },
+  {
+    label: 'Dynamis',
+    options: ['Halicarnassus', 'Maduin', 'Marilith', 'Seraph'],
+  },
+  {
+    label: 'Primal',
+    options: ['Behemoth', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Ultros'],
+  },
+
+  {
+    label: 'Chaos',
+    options: ['Cerberus', 'Louisoix', 'Moogle', 'Omega', 'Phantom', 'Ragnarok', 'Sagittarius', 'Spriggan'],
+  },
+  {
+    label: 'Light',
+    options: ['Alpha', 'Lich', 'Odin', 'Phoenix', 'Raiden', 'Shiva', 'Twintania', 'Zodiark'],
+  },
+  {
+    label: 'Materia',
+    options: ['Bismarck', 'Ravana', 'Sephirot', 'Sophia', 'Zurvan'],
+  },
+]
