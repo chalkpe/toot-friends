@@ -18,8 +18,12 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
       <Space direction="vertical">
         <Form.Item label="카드 이미지">
           <Upload
-            maxCount={1}
+            accept="image/*"
             listType="picture"
+            maxCount={1}
+            defaultFileList={
+              config.image ? [{ uid: '1', name: 'image.png', url: config.image, status: 'done' }] : undefined
+            }
             beforeUpload={() => false}
             onRemove={() => setConfig({ ...config, image: null })}
             onChange={(info) => {
