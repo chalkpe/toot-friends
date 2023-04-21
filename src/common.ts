@@ -52,7 +52,7 @@ export const jobs = [
 export const servers = [
   {
     label: 'Korea',
-    options: ['카벙클', '초코보', '모그리', '톤베리', '펜리르']
+    options: ['카벙클', '초코보', '모그리', '톤베리', '펜리르'],
   },
   {
     label: 'Elemental',
@@ -86,7 +86,6 @@ export const servers = [
     label: 'Primal',
     options: ['Behemoth', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Ultros'],
   },
-
   {
     label: 'Chaos',
     options: ['Cerberus', 'Louisoix', 'Moogle', 'Omega', 'Phantom', 'Ragnarok', 'Sagittarius', 'Spriggan'],
