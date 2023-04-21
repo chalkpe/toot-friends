@@ -5,6 +5,7 @@ export type Config = {
   server: string
   title: string
   image: any
+  scale: number
   job: string
 }
 
@@ -15,6 +16,7 @@ export const defaultConfig: Config = {
   server: '초코보',
   title: '궁극의 전설',
   image: null,
+  scale: 1,
   job: 'summoner',
 }
 

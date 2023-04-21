@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { Button, Card, Divider, Form, Image, Input, Radio, Space, Upload } from 'antd'
+import { Button, Card, Divider, Form, Image, Input, Radio, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
@@ -32,6 +32,17 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           >
             <Button icon={<UploadOutlined />}>이미지 선택하기</Button>
           </Upload>
+        </Form.Item>
+
+        <Form.Item label="카드 이미지 확대/축소">
+          <Slider
+            min={0}
+            max={2}
+            step={0.01}
+            tooltip={{ formatter: (value) => `${Math.floor((value ?? 0) * 100)}%` }}
+            defaultValue={config.scale}
+            onChange={(scale) => setConfig({ ...config, scale })}
+          />
         </Form.Item>
 
         <Form.Item label="주직업">

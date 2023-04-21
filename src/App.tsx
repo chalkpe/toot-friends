@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Layout } from 'antd'
 
 import Canvas from './components/Canvas'
 import Options from './components/Options'
@@ -9,10 +10,12 @@ function App() {
   const [config, setConfig] = useState<Config>(defaultConfig)
 
   return (
-    <div className='App'>
-      <Canvas config={config} />
-      <Options config={config} setConfig={setConfig} />
-    </div>
+    <Layout style={{ padding: 10 }}>
+      <Layout.Content>
+        <Canvas config={config} />
+        <Options config={config} setConfig={setConfig} />
+      </Layout.Content>
+    </Layout>
   )
 }
 

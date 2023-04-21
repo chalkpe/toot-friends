@@ -20,7 +20,8 @@ interface CanvasProps {
 
 const Canvas: FC<CanvasProps> = ({ config }) => {
   const ref = useRef<StageRef>(null)
-  const [imageOffset, setImageOffset] = useState(0)
+
+  const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 })
 
   const [white] = useImage('/white.png', 'anonymous')
   const [black] = useImage('/black.png', 'anonymous')
@@ -62,6 +63,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
   return (
     <Card
+      hoverable
       title="툿친소 시트 메이커"
       bodyStyle={{ padding: 0 }}
       extra={
@@ -77,7 +79,12 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         style={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8, overflow: 'hidden' }}
       >
         <Layer>
-          <Image image={image} x={-(sceneWidth / 2 - leftRectWidth / 2) + imageOffset} />
+          <Image
+            image={image}
+            scale={{ x: config.scale, y: config.scale }}
+            x={imageOffset.x - (sceneWidth / 2 - leftRectWidth / 2)}
+            y={imageOffset.y}
+          />
 
           {/* 배경 이미지 */}
           <Image image={config.color === 'white' ? white : black} />
@@ -129,7 +136,9 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             width={sceneWidth}
             height={sceneHeight}
             draggable
-            onDragMove={(e) => setImageOffset(imageOffset + e.evt.movementX)}
+            onDragMove={(e) =>
+              setImageOffset({ x: imageOffset.x + e.evt.movementX, y: imageOffset.y + e.evt.movementY })
+            }
             onDragEnd={(e) => e.target.to({ x: 0, y: 0 })}
           ></Rect>
         </Layer>
