@@ -132,9 +132,10 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             width={sceneWidth}
             height={sceneHeight}
             draggable
-            onDragMove={(e) =>
-              setImageOffset({ x: imageOffset.x + e.evt.movementX, y: imageOffset.y + e.evt.movementY })
-            }
+            onDragMove={(e) => {
+              if (Number.isFinite(e.evt.movementX) && Number.isFinite(e.evt.movementY))
+                setImageOffset({ x: imageOffset.x + e.evt.movementX, y: imageOffset.y + e.evt.movementY })
+            }}
             onDragEnd={(e) => e.target.to({ x: 0, y: 0 })}
           ></Rect>
         </Layer>
