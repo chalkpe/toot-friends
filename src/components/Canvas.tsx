@@ -7,7 +7,7 @@ import { Image, Layer, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
 import useImage from 'use-image'
 
-import { Config } from '../common'
+import { Config, iconPrefix } from '../common'
 
 const sceneWidth = 1920
 const sceneHeight = 1080
@@ -20,16 +20,12 @@ interface CanvasProps {
 
 const Canvas: FC<CanvasProps> = ({ config }) => {
   const ref = useRef<StageRef>(null)
-
   const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 })
 
-  const [white] = useImage('/white.png', 'anonymous')
-  const [black] = useImage('/black.png', 'anonymous')
   const [image] = useImage(config.image, 'anonymous')
-  const [job] = useImage(
-    `https://raw.githubusercontent.com/xivapi/classjob-icons/master/icons/${config.job}.png`,
-    'anonymous'
-  )
+  const [white] = useImage('./white.png', 'anonymous')
+  const [black] = useImage('./black.png', 'anonymous')
+  const [job] = useImage(`${iconPrefix}/${config.job}.png`, 'anonymous')
 
   const resize = useCallback(() => {
     const stage = ref.current
