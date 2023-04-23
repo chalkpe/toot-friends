@@ -9,6 +9,7 @@ import {
   Form,
   Input,
   Radio,
+  Select,
   Slider,
   Space,
   Upload,
@@ -135,18 +136,31 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             <Radio value="white">흰색</Radio>
           </Radio.Group>
         </Form.Item>
-        {/* <Form.Item label="폰트 설정">
-          <Input
-            placeholder="폰트 이름을 입력하세요."
+        <Form.Item label="폰트 설정">
+          <Select
             value={config.font}
-            onChange={(e) => setConfig({ ...config, font: e.target.value })}
+            onChange={(font) => setConfig({ ...config, font })}
+            placeholder="폰트 이름을 입력하세요."
+            options={['NanumBarunpen', 'Noto Sans KR'].map((font) => ({
+              value: font,
+              label: <span style={{ fontFamily: font }}>{font}</span>,
+            }))}
           />
-        </Form.Item> */}
+        </Form.Item>
       </Space>
     ),
 
     ffxiv: (
       <Space direction="vertical">
+        <Form.Item label="메인 퀘스트 진도">
+          <Space wrap>
+            <Input
+              value={config.expansion}
+              onChange={(e) => setConfig({ ...config, expansion: e.target.value })}
+              placeholder="예시) v6.3 완료"
+            />
+          </Space>
+        </Form.Item>
         <Form.Item label="선호 설정">
           <Space wrap>
             <Input
@@ -167,21 +181,13 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
     ),
     mastodon: (
       <Space direction="vertical">
-        <Form.Item label="선호 설정">
-          <Space wrap>
-            <Input
-              style={{ width: 300 }}
-              value={config.like}
-              onChange={(e) => setConfig({ ...config, like: e.target.value })}
-              placeholder="좋아요"
-            />
-            <Input
-              style={{ width: 300 }}
-              value={config.dislike}
-              onChange={(e) => setConfig({ ...config, dislike: e.target.value })}
-              placeholder="싫어요"
-            />
-          </Space>
+        <Form.Item label="정보">
+          <Input
+            style={{ width: 300 }}
+            value={config.handle}
+            onChange={(e) => setConfig({ ...config, handle: e.target.value })}
+            placeholder="핸들 (예시: @chalk@chalk.moe)"
+          />
         </Form.Item>
       </Space>
     ),

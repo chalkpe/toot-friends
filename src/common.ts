@@ -7,8 +7,10 @@ export type Config = {
   image: any
   scale: number
   job: string,
+  expansion: string,
   like: string,
   dislike: string,
+  handle: string,
 }
 
 export const defaultConfig: Config = {
@@ -20,8 +22,10 @@ export const defaultConfig: Config = {
   image: null,
   scale: 1,
   job: 'summoner',
+  expansion: 'v6.3 완료',
   like: '절 영식',
   dislike: '스포일러',
+  handle: '@chalk@chalk.moe'
 }
 
 export const jobs = [

@@ -63,6 +63,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   })
 
   const fontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
+  const lineColor = useMemo(() => (config.color === 'black' ? '#3c3c3c' : '#b3b3b3'), [config.color])
 
   return (
     <Card
@@ -134,14 +135,14 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {/* 세로 구분선 */}
           <Line
             points={[1328, 221, 1328, 853]}
-            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            stroke={lineColor}
             dash={[10, 10]}
           />
 
           {/* 오른쪽 가로선 #1 */}
           <Line
             points={[1350, 542, 1844, 542]}
-            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            stroke={lineColor}
             dash={[10, 10]}
           />
 
@@ -153,10 +154,11 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             fontSize={30}
             fill={config.color === 'black' ? '#818181' : '#424242'}
           />
+
           <Text
             x={600}
             y={265}
-            text="v6.3 완료"
+            text={config.expansion}
             fontFamily={fontFamily}
             fontSize={48}
             fill={config.color === 'black' ? '#818181' : '#424242'}
@@ -165,21 +167,21 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {/* 왼쪽 가로선 #1 */}
           <Line
             points={[586, 340, 1310, 340]}
-            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            stroke={lineColor}
             dash={[10, 10]}
           />
 
           {/* 왼쪽 가로선 #2 */}
           <Line
             points={[586, 578, 1310, 578]}
-            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            stroke={lineColor}
             dash={[10, 10]}
           />
 
           {/* 왼쪽 가로선 #2 */}
           <Line
             points={[586 + 20, 725, 1310 - 20, 725]}
-            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            stroke={lineColor}
             dash={[10, 10]}
           />
 
