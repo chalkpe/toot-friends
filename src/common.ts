@@ -6,11 +6,12 @@ export type Config = {
   title: string
   image: any
   scale: number
-  job: string,
-  expansion: string,
-  like: string,
-  dislike: string,
-  handle: string,
+  job: string
+  progress: string,
+  expansion: string
+  like: string
+  dislike: string
+  handle: string
 }
 
 export const defaultConfig: Config = {
@@ -22,11 +23,20 @@ export const defaultConfig: Config = {
   image: null,
   scale: 1,
   job: 'summoner',
-  expansion: 'v6.3 완료',
+  progress: 'v6.3 완료',
+  expansion: 'endwalker',
   like: '절 영식',
   dislike: '스포일러',
-  handle: '@chalk@chalk.moe'
+  handle: '@chalk@chalk.moe',
 }
+
+export const expansions = [
+  { label: '신생 에오르제아', value: 'arealmreborn' },
+  { label: '창천의 이슈가르드', value: 'heavensward' },
+  { label: '홍련의 해방자', value: 'stormblood' },
+  { label: '칠흑의 반역자', value: 'shadowbringers' },
+  { label: '효월의 종언', value: 'endwalker' },
+]
 
 export const jobs = [
   'paladin',

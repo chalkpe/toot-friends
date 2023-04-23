@@ -25,7 +25,9 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const [image] = useImage(config.image, 'anonymous')
   const [white] = useImage('./white.png', 'anonymous')
   const [black] = useImage('./black.png', 'anonymous')
+
   const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
+  const [expansion] = useImage(`./expansions/${config.expansion}.png`, 'anonymous')
 
   const resize = useCallback(() => {
     const stage = ref.current
@@ -133,19 +135,12 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           />
 
           {/* 세로 구분선 */}
-          <Line
-            points={[1328, 221, 1328, 853]}
-            stroke={lineColor}
-            dash={[10, 10]}
-          />
+          <Line points={[1328, 221, 1328, 853]} stroke={lineColor} dash={[10, 10]} />
 
           {/* 오른쪽 가로선 #1 */}
-          <Line
-            points={[1350, 542, 1844, 542]}
-            stroke={lineColor}
-            dash={[10, 10]}
-          />
+          <Line points={[1350, 542, 1844, 542]} stroke={lineColor} dash={[10, 10]} />
 
+          {/* 메인 퀘스트 진행도 레이블 */}
           <Text
             x={600}
             y={220}
@@ -155,35 +150,33 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             fill={config.color === 'black' ? '#818181' : '#424242'}
           />
 
+          {/* 메인 퀘스트 진행도 */}
           <Text
             x={600}
             y={265}
-            text={config.expansion}
+            text={config.progress}
             fontFamily={fontFamily}
             fontSize={48}
             fill={config.color === 'black' ? '#818181' : '#424242'}
           />
 
+          {/* 메인 퀘스트 진행도 이미지 */}
+          <Image
+            image={expansion}
+            x={1310 - (expansion ? (105 * expansion.width) / expansion.height : 0)}
+            y={215}
+            height={105}
+            width={expansion ? (105 * expansion.width) / expansion.height : 0}
+          />
+
           {/* 왼쪽 가로선 #1 */}
-          <Line
-            points={[586, 340, 1310, 340]}
-            stroke={lineColor}
-            dash={[10, 10]}
-          />
+          <Line points={[586, 340, 1310, 340]} stroke={lineColor} dash={[10, 10]} />
 
           {/* 왼쪽 가로선 #2 */}
-          <Line
-            points={[586, 578, 1310, 578]}
-            stroke={lineColor}
-            dash={[10, 10]}
-          />
+          <Line points={[586, 578, 1310, 578]} stroke={lineColor} dash={[10, 10]} />
 
-          {/* 왼쪽 가로선 #2 */}
-          <Line
-            points={[586 + 20, 725, 1310 - 20, 725]}
-            stroke={lineColor}
-            dash={[10, 10]}
-          />
+          {/* 왼쪽 가로선 #3 */}
+          <Line points={[586 + 20, 725, 1310 - 20, 725]} stroke={lineColor} dash={[10, 10]} />
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect

@@ -17,7 +17,7 @@ import {
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, jobs, servers } from '../common'
+import { Config, expansions, jobs, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -155,9 +155,16 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         <Form.Item label="메인 퀘스트 진도">
           <Space wrap>
             <Input
-              value={config.expansion}
-              onChange={(e) => setConfig({ ...config, expansion: e.target.value })}
+              value={config.progress}
+              onChange={(e) => setConfig({ ...config, progress: e.target.value })}
               placeholder="예시) v6.3 완료"
+            />
+            <Select
+              style={{ width: 150 }}
+              value={config.expansion}
+              onChange={(expansion) => setConfig({ ...config, expansion })}
+              placeholder="확장팩"
+              options={expansions}
             />
           </Space>
         </Form.Item>
