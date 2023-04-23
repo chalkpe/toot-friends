@@ -1,9 +1,22 @@
 import { FC, useState } from 'react'
-import { AutoComplete, Button, Card, Divider, Form, Image, Input, Radio, Slider, Space, Upload } from 'antd'
+import {
+  AutoComplete,
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Divider,
+  Form,
+  Input,
+  Radio,
+  Slider,
+  Space,
+  Upload,
+} from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, iconPrefix, jobs, servers } from '../common'
+import { Config, jobs, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -50,20 +63,24 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="주직업">
-          {jobs.map((job, index) =>
-            job ? (
-              <Image
-                key={job}
-                width="1.5rem"
-                preview={false}
-                alt={job}
-                src={`${iconPrefix}/${job}.png`}
-                onClick={() => setConfig({ ...config, job })}
-              />
-            ) : (
-              <Divider key={index} type="vertical" />
-            )
-          )}
+          <Space size="small" wrap>
+            {jobs.map((job, index) => {
+              if (!job) return <Divider key={index} type="vertical" />
+
+              const image = (
+                <Avatar
+                  size="small"
+                  shape="square"
+                  key={job}
+                  alt={job}
+                  src={`./icons/${job}.png`}
+                  onClick={() => setConfig({ ...config, job })}
+                />
+              )
+
+              return job === config.job ? <Badge dot>{image}</Badge> : image
+            })}
+          </Space>
         </Form.Item>
 
         <Form.Item label="캐릭터 정보">

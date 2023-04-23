@@ -1,0 +1,16 @@
+.ant-layout {
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+@media (min-width: 512px) {
+  .ant-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ant-layout-content {
+    max-width: 512px;
+  }
+}

@@ -7,7 +7,7 @@ import { Image, Layer, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
 import useImage from 'use-image'
 
-import { Config, iconPrefix } from '../common'
+import { Config } from '../common'
 
 const sceneWidth = 1920
 const sceneHeight = 1080
@@ -25,7 +25,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const [image] = useImage(config.image, 'anonymous')
   const [white] = useImage('./white.png', 'anonymous')
   const [black] = useImage('./black.png', 'anonymous')
-  const [job] = useImage(`${iconPrefix}/${config.job}.png`, 'anonymous')
+  const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
 
   const resize = useCallback(() => {
     const stage = ref.current
@@ -45,6 +45,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
     const a = document.createElement('a')
     a.href = stage.toDataURL()
+    a.target = '_blank'
     a.download = 'toot-friends.png'
     a.click()
   }, [ref])

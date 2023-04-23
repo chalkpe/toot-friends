@@ -20,8 +20,6 @@ export const defaultConfig: Config = {
   job: 'summoner',
 }
 
-export const iconPrefix = 'https://raw.githubusercontent.com/xivapi/classjob-icons/master/icons'
-
 export const jobs = [
   'paladin',
   'warrior',
@@ -47,6 +45,19 @@ export const jobs = [
   'summoner',
   'redmage',
   'bluemage',
+  null,
+  'carpenter',
+  'blacksmith',
+  'armorer',
+  'goldsmith',
+  'leatherworker',
+  'weaver',
+  'alchemist',
+  'culinarian',
+  null,
+  'miner',
+  'botanist',
+  'fisher',
 ]
 
 export const servers = [
