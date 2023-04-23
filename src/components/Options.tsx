@@ -62,23 +62,29 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           />
         </Form.Item>
 
-        <Form.Item label="주직업">
+        <Form.Item label="대표 직업">
           <Space size="small" wrap>
             {jobs.map((job, index) => {
               if (!job) return <Divider key={index} type="vertical" />
 
               const image = (
                 <Avatar
+                  key={job}
                   size="small"
                   shape="square"
-                  key={job}
                   alt={job}
                   src={`./icons/${job}.png`}
                   onClick={() => setConfig({ ...config, job })}
                 />
               )
 
-              return job === config.job ? <Badge dot>{image}</Badge> : image
+              return job === config.job ? (
+                <Badge dot key={job}>
+                  {image}
+                </Badge>
+              ) : (
+                image
+              )
             })}
           </Space>
         </Form.Item>
@@ -129,20 +135,63 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             <Radio value="white">흰색</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="폰트 설정">
+        {/* <Form.Item label="폰트 설정">
           <Input
             placeholder="폰트 이름을 입력하세요."
             value={config.font}
             onChange={(e) => setConfig({ ...config, font: e.target.value })}
           />
+        </Form.Item> */}
+      </Space>
+    ),
+
+    ffxiv: (
+      <Space direction="vertical">
+        <Form.Item label="선호 설정">
+          <Space wrap>
+            <Input
+              style={{ width: 300 }}
+              value={config.like}
+              onChange={(e) => setConfig({ ...config, like: e.target.value })}
+              placeholder="좋아요"
+            />
+            <Input
+              style={{ width: 300 }}
+              value={config.dislike}
+              onChange={(e) => setConfig({ ...config, dislike: e.target.value })}
+              placeholder="싫어요"
+            />
+          </Space>
+        </Form.Item>
+      </Space>
+    ),
+    mastodon: (
+      <Space direction="vertical">
+        <Form.Item label="선호 설정">
+          <Space wrap>
+            <Input
+              style={{ width: 300 }}
+              value={config.like}
+              onChange={(e) => setConfig({ ...config, like: e.target.value })}
+              placeholder="좋아요"
+            />
+            <Input
+              style={{ width: 300 }}
+              value={config.dislike}
+              onChange={(e) => setConfig({ ...config, dislike: e.target.value })}
+              placeholder="싫어요"
+            />
+          </Space>
         </Form.Item>
       </Space>
     ),
   }
 
   const tabs: { key: keyof typeof components; tab: string }[] = [
-    { key: 'basic', tab: '기본설정' },
-    { key: 'theme', tab: '테마설정' },
+    { key: 'basic', tab: '기본' },
+    { key: 'theme', tab: '테마' },
+    { key: 'ffxiv', tab: '파판14' },
+    { key: 'mastodon', tab: '마스토돈' },
   ]
 
   return (

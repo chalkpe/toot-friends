@@ -3,7 +3,7 @@ import { FC, useCallback, useMemo, useState, useEffect, useRef } from 'react'
 import { Button, Card } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
 
-import { Image, Layer, Rect, Stage, Text } from 'react-konva'
+import { Image, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
 import useImage from 'use-image'
 
@@ -43,12 +43,18 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     const stage = ref.current
     if (!stage) return
 
+    stage.width(sceneWidth)
+    stage.height(sceneHeight)
+    stage.scale({ x: 1, y: 1 })
+
     const a = document.createElement('a')
     a.href = stage.toDataURL()
     a.target = '_blank'
     a.download = 'toot-friends.png'
     a.click()
-  }, [ref])
+
+    resize()
+  }, [resize])
 
   useEffect(() => {
     resize()
@@ -108,7 +114,6 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             y={940}
             text={config.name}
             align="center"
-            fontStyle="bold"
             fontFamily={fontFamily}
             fontSize={48}
             fill={'white'}
@@ -124,6 +129,58 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             fontFamily={fontFamily}
             fontSize={36}
             fill={'#8b8b8b'}
+          />
+
+          {/* 세로 구분선 */}
+          <Line
+            points={[1328, 221, 1328, 853]}
+            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            dash={[10, 10]}
+          />
+
+          {/* 오른쪽 가로선 #1 */}
+          <Line
+            points={[1350, 542, 1844, 542]}
+            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            dash={[10, 10]}
+          />
+
+          <Text
+            x={600}
+            y={220}
+            text="메인 퀘스트"
+            fontFamily={'KoPub Dotum'}
+            fontSize={30}
+            fill={config.color === 'black' ? '#818181' : '#424242'}
+          />
+          <Text
+            x={600}
+            y={265}
+            text="v6.3 완료"
+            fontFamily={fontFamily}
+            fontSize={48}
+            fill={config.color === 'black' ? '#818181' : '#424242'}
+          />
+
+          {/* 왼쪽 가로선 #1 */}
+          <Line
+            points={[586, 340, 1310, 340]}
+            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            dash={[10, 10]}
+          />
+
+          {/* 왼쪽 가로선 #2 */}
+          <Line
+            points={[586, 578, 1310, 578]}
+            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            dash={[10, 10]}
+          />
+
+          {/* 왼쪽 가로선 #2 */}
+          <Line
+            points={[586 + 20, 725, 1310 - 20, 725]}
+            stroke={config.color === 'black' ? '#3c3c3c' : '#b3b3b3'}
+            dash={[10, 10]}
           />
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}

@@ -19,7 +19,10 @@ function App() {
       </Layout.Content>
 
       <Layout.Footer>
-        asdasd
+        This site is not affiliated with Square Enix
+        <br />
+        FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.
+        <br />© 2010 - {new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.
       </Layout.Footer>
     </Layout>
   )

@@ -1,9 +1,13 @@
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 .ant-layout {
   padding: 1rem;
   min-height: 100vh;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .ant-layout {
     display: flex;
     flex-direction: column;
@@ -11,6 +15,6 @@
   }
 
   .ant-layout-content {
-    max-width: 768px;
+    max-width: 1024px;
   }
 }

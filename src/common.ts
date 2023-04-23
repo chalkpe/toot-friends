@@ -6,18 +6,22 @@ export type Config = {
   title: string
   image: any
   scale: number
-  job: string
+  job: string,
+  like: string,
+  dislike: string,
 }
 
 export const defaultConfig: Config = {
   color: 'black',
-  font: 'Noto Sans KR',
+  font: 'NanumBarunpen',
   name: '초크',
   server: '초코보',
   title: '궁극의 전설',
   image: null,
   scale: 1,
   job: 'summoner',
+  like: '절 영식',
+  dislike: '스포일러',
 }
 
 export const jobs = [
