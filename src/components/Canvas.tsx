@@ -1,7 +1,7 @@
 import { FC, useCallback, useMemo, useState, useEffect, useRef } from 'react'
 
-import { Button, Card } from 'antd'
-import { DownloadOutlined } from '@ant-design/icons'
+import { Button, Card, Space } from 'antd'
+import { DownloadOutlined, InfoCircleOutlined } from '@ant-design/icons'
 
 import { Image, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
@@ -13,6 +13,8 @@ const sceneWidth = 1920
 const sceneHeight = 1080
 
 const leftRectWidth = 544
+const rightBoxStartX = 586
+const rightSeparatorX = 1328
 
 interface CanvasProps {
   config: Config
@@ -22,32 +24,35 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const ref = useRef<StageRef>(null)
   const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 })
 
-  const [image] = useImage(config.image, 'anonymous')
   const [white] = useImage('./white.png', 'anonymous')
   const [black] = useImage('./black.png', 'anonymous')
+  const [userImage] = useImage(config.image, 'anonymous')
 
   const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
   const [expansion] = useImage(`./expansions/${config.expansion}.png`, 'anonymous')
 
-  const resize = useCallback(() => {
+  const resize = useCallback((scale: number) => {
     const stage = ref.current
-    if (!stage) return
+    if (stage) {
+      stage.width(sceneWidth * scale)
+      stage.height(sceneHeight * scale)
+      stage.scale({ x: scale, y: scale })
+    }
+  }, [])
 
-    const container = stage.container()
-    const scale = container.offsetWidth / sceneWidth
-
-    stage.width(sceneWidth * scale)
-    stage.height(sceneHeight * scale)
-    stage.scale({ x: scale, y: scale })
-  }, [ref])
+  const resizeToContainer = useCallback(() => {
+    const stage = ref.current
+    if (stage) {
+      const container = stage.container()
+      resize(container.offsetWidth / sceneWidth)
+    }
+  }, [resize])
 
   const download = useCallback(() => {
     const stage = ref.current
     if (!stage) return
 
-    stage.width(sceneWidth)
-    stage.height(sceneHeight)
-    stage.scale({ x: 1, y: 1 })
+    resize(1)
 
     const a = document.createElement('a')
     a.href = stage.toDataURL()
@@ -55,22 +60,139 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     a.download = 'toot-friends.png'
     a.click()
 
-    resize()
-  }, [resize])
+    resizeToContainer()
+  }, [resize, resizeToContainer])
 
   useEffect(() => {
-    resize()
-    window.addEventListener('resize', resize)
-    return () => void window.removeEventListener('resize', resize)
+    resizeToContainer()
+    window.addEventListener('resize', resizeToContainer)
+    return () => void window.removeEventListener('resize', resizeToContainer)
   })
 
   const fontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
   const lineColor = useMemo(() => (config.color === 'black' ? '#3c3c3c' : '#b3b3b3'), [config.color])
 
+  const image = (
+    <>
+      {/* 유저 이미지 */}
+      <Image
+        image={userImage}
+        scale={{ x: config.scale, y: config.scale }}
+        x={imageOffset.x - (sceneWidth / 2 - leftRectWidth / 2)}
+        y={imageOffset.y}
+      />
+
+      {/* 배경 이미지 */}
+      <Image image={config.color === 'white' ? white : black} />
+    </>
+  )
+
+  const leftRect = (
+    <>
+      {/* 잡 아이콘 */}
+      <Image image={job} x={leftRectWidth / 2 - 40} y={810} width={80} height={80} />
+
+      {/* 칭호 */}
+      <Text
+        width={leftRectWidth}
+        x={0}
+        y={900}
+        text={config.title}
+        align="center"
+        fontFamily={fontFamily}
+        fontSize={24}
+        fill={'#b3b3b3'}
+      />
+
+      {/* 이름 */}
+      <Text
+        width={leftRectWidth}
+        x={0}
+        y={940}
+        text={config.name}
+        align="center"
+        fontFamily={fontFamily}
+        fontSize={48}
+        fill={'white'}
+      />
+
+      {/* 서버 */}
+      <Text
+        width={leftRectWidth}
+        x={0}
+        y={990}
+        text={config.server}
+        align="center"
+        fontFamily={fontFamily}
+        fontSize={36}
+        fill={'#8b8b8b'}
+      />
+    </>
+  )
+
+  const lines = (
+    <>
+      {/* 세로 구분선 */}
+      <Line points={[rightSeparatorX, 221, rightSeparatorX, 853]} stroke={lineColor} dash={[10, 10]} />
+
+      {/* 왼쪽 가로선 #1 */}
+      <Line points={[rightBoxStartX, 340, rightSeparatorX - 18, 340]} stroke={lineColor} dash={[10, 10]} />
+
+      {/* 왼쪽 가로선 #2 */}
+      <Line points={[rightBoxStartX, 578, rightSeparatorX - 18, 578]} stroke={lineColor} dash={[10, 10]} />
+
+      {/* 왼쪽 가로선 #3 */}
+      <Line points={[rightBoxStartX + 20, 725, rightSeparatorX - 38, 725]} stroke={lineColor} dash={[10, 10]} />
+
+      {/* 오른쪽 가로선 #1 */}
+      <Line points={[rightSeparatorX + 22, 542, 1844, 542]} stroke={lineColor} dash={[10, 10]} />
+    </>
+  )
+
+  const progress = (
+    <>
+      {/* 메인 퀘스트 진행도 레이블 */}
+      <Text
+        x={600}
+        y={220}
+        text="메인 퀘스트"
+        fontFamily={'KoPub Dotum'}
+        fontSize={30}
+        fill={config.color === 'black' ? '#818181' : '#424242'}
+      />
+
+      {/* 메인 퀘스트 진행도 */}
+      <Text
+        x={600}
+        y={265}
+        text={config.progress}
+        fontFamily={fontFamily}
+        fontSize={48}
+        fill={config.color === 'black' ? '#818181' : '#424242'}
+      />
+
+      {/* 메인 퀘스트 진행도 이미지 */}
+      {expansion && (
+        <Image
+          image={expansion}
+          x={1310 - (105 * expansion.width) / expansion.height}
+          y={215}
+          height={105}
+          width={(105 * expansion.width) / expansion.height}
+        />
+      )}
+    </>
+  )
+
   return (
     <Card
       hoverable
-      title="툿친소 시트 메이커"
+      title={
+        <Space>
+          <span>툿친소 시트 메이커</span>
+          <InfoCircleOutlined />
+        </Space>
+      }
       bodyStyle={{ padding: 0 }}
       extra={
         <Button type="text" icon={<DownloadOutlined />} onClick={download}>
@@ -85,100 +207,10 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         style={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8, overflow: 'hidden' }}
       >
         <Layer>
-          <Image
-            image={image}
-            scale={{ x: config.scale, y: config.scale }}
-            x={imageOffset.x - (sceneWidth / 2 - leftRectWidth / 2)}
-            y={imageOffset.y}
-          />
-
-          {/* 배경 이미지 */}
-          <Image image={config.color === 'white' ? white : black} />
-
-          {/* 잡 아이콘 */}
-          <Image image={job} x={leftRectWidth / 2 - 40} y={810} width={80} height={80} />
-
-          {/* 칭호 */}
-          <Text
-            width={leftRectWidth}
-            x={0}
-            y={900}
-            text={config.title}
-            align="center"
-            fontFamily={fontFamily}
-            fontSize={24}
-            fill={'#b3b3b3'}
-          />
-
-          {/* 이름 */}
-          <Text
-            width={leftRectWidth}
-            x={0}
-            y={940}
-            text={config.name}
-            align="center"
-            fontFamily={fontFamily}
-            fontSize={48}
-            fill={'white'}
-          />
-
-          {/* 서버 */}
-          <Text
-            width={leftRectWidth}
-            x={0}
-            y={990}
-            text={config.server}
-            align="center"
-            fontFamily={fontFamily}
-            fontSize={36}
-            fill={'#8b8b8b'}
-          />
-
-          {/* 세로 구분선 */}
-          <Line points={[1328, 221, 1328, 853]} stroke={lineColor} dash={[10, 10]} />
-
-          {/* 오른쪽 가로선 #1 */}
-          <Line points={[1350, 542, 1844, 542]} stroke={lineColor} dash={[10, 10]} />
-
-          {/* 메인 퀘스트 진행도 레이블 */}
-          <Text
-            x={600}
-            y={220}
-            text="메인 퀘스트"
-            fontFamily={'KoPub Dotum'}
-            fontSize={30}
-            fill={config.color === 'black' ? '#818181' : '#424242'}
-          />
-
-          {/* 메인 퀘스트 진행도 */}
-          <Text
-            x={600}
-            y={265}
-            text={config.progress}
-            fontFamily={fontFamily}
-            fontSize={48}
-            fill={config.color === 'black' ? '#818181' : '#424242'}
-          />
-
-          {/* 메인 퀘스트 진행도 이미지 */}
-          {expansion && (
-            <Image
-              image={expansion}
-              x={1310 - (105 * expansion.width) / expansion.height}
-              y={215}
-              height={105}
-              width={(105 * expansion.width) / expansion.height}
-            />
-          )}
-
-          {/* 왼쪽 가로선 #1 */}
-          <Line points={[586, 340, 1310, 340]} stroke={lineColor} dash={[10, 10]} />
-
-          {/* 왼쪽 가로선 #2 */}
-          <Line points={[586, 578, 1310, 578]} stroke={lineColor} dash={[10, 10]} />
-
-          {/* 왼쪽 가로선 #3 */}
-          <Line points={[586 + 20, 725, 1310 - 20, 725]} stroke={lineColor} dash={[10, 10]} />
+          {image}
+          {lines}
+          {leftRect}
+          {progress}
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect
@@ -187,11 +219,11 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             width={sceneWidth}
             height={sceneHeight}
             draggable
+            onDragEnd={(e) => e.target.to({ x: 0, y: 0 })}
             onDragMove={(e) => {
               if (Number.isFinite(e.evt.movementX) && Number.isFinite(e.evt.movementY))
                 setImageOffset({ x: imageOffset.x + e.evt.movementX, y: imageOffset.y + e.evt.movementY })
             }}
-            onDragEnd={(e) => e.target.to({ x: 0, y: 0 })}
           ></Rect>
         </Layer>
       </Stage>
