@@ -161,13 +161,15 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           />
 
           {/* 메인 퀘스트 진행도 이미지 */}
-          <Image
-            image={expansion}
-            x={1310 - (expansion ? (105 * expansion.width) / expansion.height : 0)}
-            y={215}
-            height={105}
-            width={expansion ? (105 * expansion.width) / expansion.height : 0}
-          />
+          {expansion && (
+            <Image
+              image={expansion}
+              x={1310 - (105 * expansion.width) / expansion.height}
+              y={215}
+              height={105}
+              width={(105 * expansion.width) / expansion.height}
+            />
+          )}
 
           {/* 왼쪽 가로선 #1 */}
           <Line points={[586, 340, 1310, 340]} stroke={lineColor} dash={[10, 10]} />
