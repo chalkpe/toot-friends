@@ -71,6 +71,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
   const fontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
   const lineColor = useMemo(() => (config.color === 'black' ? '#3c3c3c' : '#b3b3b3'), [config.color])
+  const textColor = useMemo(() => (config.color === 'black' ? '#818181' : '#424242'), [config.color])
 
   const image = (
     <>
@@ -146,30 +147,31 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
       {/* 오른쪽 가로선 #1 */}
       <Line points={[rightSeparatorX + 22, 542, 1844, 542]} stroke={lineColor} dash={[10, 10]} />
+
+      {/* 지그재그 선 */}
+      {Array.from(Array(50)).map((_, i, a) => {
+        const invert = i % 2 !== 0 ? 0.5 : -0.5
+        const step = (1844 - rightBoxStartX) / a.length
+        return (
+          <Line
+            key={i}
+            points={[
+              rightBoxStartX + step * i,
+              900 - invert * step,
+              rightBoxStartX + step * (i + 1),
+              900 + invert * step,
+            ]}
+            stroke={lineColor}
+          />
+        )
+      })}
     </>
   )
 
   const progress = (
     <>
       {/* 메인 퀘스트 진행도 레이블 */}
-      <Text
-        x={600}
-        y={220}
-        text="메인 퀘스트"
-        fontFamily={'KoPub Dotum'}
-        fontSize={30}
-        fill={config.color === 'black' ? '#818181' : '#424242'}
-      />
-
-      {/* 메인 퀘스트 진행도 */}
-      <Text
-        x={600}
-        y={265}
-        text={config.progress}
-        fontFamily={fontFamily}
-        fontSize={48}
-        fill={config.color === 'black' ? '#818181' : '#424242'}
-      />
+      <Text x={600} y={220} text="메인 퀘스트" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} />
 
       {/* 메인 퀘스트 진행도 이미지 */}
       {expansion && (
@@ -181,6 +183,69 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           width={(105 * expansion.width) / expansion.height}
         />
       )}
+
+      {/* 메인 퀘스트 진행도 */}
+      <Text x={600} y={265} text={config.progress} fontFamily={fontFamily} fontSize={48} fill={textColor} />
+    </>
+  )
+
+  const mastodon = (
+    <>
+      {/* 마스토돈 계정명 */}
+      <Text
+        x={rightSeparatorX + 22}
+        y={225}
+        text={config.mastodonName}
+        fontFamily={fontFamily}
+        fontSize={48}
+        fill={textColor}
+      />
+
+      {/* 마스토돈 핸들 */}
+      <Text
+        x={rightSeparatorX + 22}
+        y={280}
+        text={config.handle}
+        fontFamily={fontFamily}
+        fontSize={36}
+        fill={textColor}
+      />
+
+      {/* 메인 퀘스트 진행도 레이블 */}
+      <Text
+        x={rightSeparatorX + 22}
+        y={350}
+        text="MAIN"
+        fontFamily={'KoPub Dotum'}
+        fontSize={30}
+        fill={textColor}
+        fontStyle="bold"
+      />
+      <Text
+        x={rightSeparatorX + 22}
+        y={390}
+        text={config.mastodonMain}
+        fontFamily={fontFamily}
+        fontSize={30}
+        fill={textColor}
+      />
+      <Text
+        x={rightSeparatorX + 22}
+        y={440}
+        text="ETC"
+        fontFamily={'KoPub Dotum'}
+        fontSize={30}
+        fill={textColor}
+        fontStyle="bold"
+      />
+      <Text
+        x={rightSeparatorX + 22}
+        y={480}
+        text={config.mastodonSub}
+        fontFamily={fontFamily}
+        fontSize={30}
+        fill={textColor}
+      />
     </>
   )
 
@@ -211,6 +276,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {lines}
           {leftRect}
           {progress}
+          {mastodon}
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect

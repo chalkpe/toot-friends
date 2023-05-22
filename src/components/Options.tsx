@@ -17,7 +17,7 @@ import {
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, expansions, jobs, servers } from '../common'
+import { Config, expansions, jobs, progress, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -154,10 +154,12 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
       <Space direction="vertical">
         <Form.Item label="메인 퀘스트 진도">
           <Space wrap>
-            <Input
+            <Select
+              style={{ width: 225 }}
               value={config.progress}
-              onChange={(e) => setConfig({ ...config, progress: e.target.value })}
+              onChange={(progress) => setConfig({ ...config, progress })}
               placeholder="예시) v6.3 완료"
+              options={progress}
             />
             <Select
               style={{ width: 150 }}
@@ -190,12 +192,36 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
     mastodon: (
       <Space direction="vertical">
         <Form.Item label="정보">
-          <Input
-            style={{ width: 300 }}
-            value={config.handle}
-            onChange={(e) => setConfig({ ...config, handle: e.target.value })}
-            placeholder="핸들 (예시: @chalk@chalk.moe)"
-          />
+          <Space wrap>
+            <Input
+              style={{ width: 300 }}
+              value={config.mastodonName}
+              onChange={(e) => setConfig({ ...config, mastodonName: e.target.value })}
+              placeholder="마스토돈 계정명"
+            />
+            <Input
+              style={{ width: 300 }}
+              value={config.handle}
+              onChange={(e) => setConfig({ ...config, handle: e.target.value })}
+              placeholder="핸들 (예시: @chalk@chalk.moe)"
+            />
+          </Space>
+        </Form.Item>
+        <Form.Item label="장르">
+          <Space wrap>
+            <Input
+              style={{ width: 300 }}
+              value={config.mastodonMain}
+              onChange={(e) => setConfig({ ...config, mastodonMain: e.target.value })}
+              placeholder="주로 언급하는 장르"
+            />
+            <Input
+              style={{ width: 300 }}
+              value={config.mastodonSub}
+              onChange={(e) => setConfig({ ...config, mastodonSub: e.target.value })}
+              placeholder="가끔 언급하는 장르"
+            />
+          </Space>
         </Form.Item>
       </Space>
     ),

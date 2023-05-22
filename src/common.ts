@@ -11,7 +11,10 @@ export type Config = {
   expansion: string
   like: string
   dislike: string
+  mastodonName: string
   handle: string
+  mastodonMain: string
+  mastodonSub: string
 }
 
 export const defaultConfig: Config = {
@@ -23,12 +26,45 @@ export const defaultConfig: Config = {
   image: null,
   scale: 1,
   job: 'summoner',
-  progress: 'v6.3 완료',
+  progress: 'v6.2 완료',
   expansion: 'endwalker',
   like: '절 영식',
   dislike: '스포일러',
+  mastodonName: '초크',
   handle: '@chalk@chalk.moe',
+  mastodonMain: '파판14',
+  mastodonSub: '명일방주',
 }
+
+export const progress = [
+  { label: 'v2.0 신생 에오르제아', value: 'v2.0 완료' },
+  { label: 'v2.3 에오르제아의 수호자', value: 'v2.3 완료' },
+  { label: 'v2.4 빙결의 환상', value: 'v2.4 완료' },
+  { label: 'v2.5 희망의 등불', value: 'v2.5 완료' },
+  { label: 'v3.0 창천의 이슈가르드', value: 'v3.0 완료' },
+  { label: 'v3.1 빛과 어둠의 경계', value: 'v3.1 완료' },
+  { label: 'v3.2 운명의 톱니바퀴', value: 'v3.2 완료' },
+  { label: 'v3.3 최후의 포효', value: 'v3.3 완료' },
+  { label: 'v3.4 혼을 계승하는 자', value: 'v3.4 완료' },
+  { label: 'v3.5 숙명의 끝', value: 'v3.5 완료' },
+  { label: 'v4.0 홍련의 해방자', value: 'v4.0 완료' },
+  { label: 'v4.1 영웅의 귀환', value: 'v4.1 완료' },
+  { label: 'v4.2 새벽의 빛', value: 'v4.2 완료' },
+  { label: 'v4.3 월하의 꽃', value: 'v4.3 완료' },
+  { label: 'v4.4 광란의 전주곡', value: 'v4.4 완료' },
+  { label: 'v4.5 영웅을 위한 진혼가', value: 'v4.5 완료' },
+  { label: 'v5.0 칠흑의 반역자', value: 'v5.0 완료' },
+  { label: 'v5.1 하얀 서약, 검은 밀약', value: 'v5.1 완료' },
+  { label: 'v5.2 추억의 흉성', value: 'v5.2 완료' },
+  { label: 'v5.3 크리스탈의 잔광', value: 'v5.3 완료' },
+  { label: 'v5.4 또 하나의 미래', value: 'v5.4 완료' },
+  { label: 'v5.5 여명의 사투', value: 'v5.5 완료' },
+  { label: 'v6.0 효월의 종언', value: 'v6.0 완료' },
+  { label: 'v6.1 새로운 모험', value: 'v6.1 완료' },
+  { label: 'v6.2 금단의 기억', value: 'v6.2 완료' },
+  { label: 'v6.3 하늘의 축제, 땅의 명동', value: 'v6.3 완료' },
+  { label: 'v6.4 옥좌의 죄인', value: 'v6.4 완료' },
+]
 
 export const expansions = [
   { label: '신생 에오르제아', value: 'arealmreborn' },
