@@ -15,6 +15,7 @@ export type Config = {
   handle: string
   mastodonMain: string
   mastodonSub: string
+  orientations: string[]
 }
 
 export const defaultConfig: Config = {
@@ -34,6 +35,7 @@ export const defaultConfig: Config = {
   handle: '@chalk@chalk.moe',
   mastodonMain: '파판14',
   mastodonSub: '명일방주',
+  orientations: []
 }
 
 export const progress = [
@@ -164,3 +166,8 @@ export const servers = [
     options: ['Bismarck', 'Ravana', 'Sephirot', 'Sophia', 'Zurvan'],
   },
 ]
+
+export const orientations = ['부스트', '관심글', '일상', '자캐', '덕질', '로컬', '연합'].map((x) => ({ label: x, value: x }))
+
+// 플레이 스타일
+// https://xivapi.com/docs/Icons?set=icons061000

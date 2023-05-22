@@ -211,7 +211,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         fill={textColor}
       />
 
-      {/* 메인 퀘스트 진행도 레이블 */}
+      {/* 마스토돈 주 장르 레이블 */}
       <Text
         x={rightSeparatorX + 22}
         y={350}
@@ -221,6 +221,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         fill={textColor}
         fontStyle="bold"
       />
+      {/* 마스토돈 주 장르 텍스트 */}
       <Text
         x={rightSeparatorX + 22}
         y={390}
@@ -229,6 +230,8 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         fontSize={30}
         fill={textColor}
       />
+
+      {/* 마스토돈 서브 장르 레이블 */}
       <Text
         x={rightSeparatorX + 22}
         y={440}
@@ -238,6 +241,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         fill={textColor}
         fontStyle="bold"
       />
+      {/* 마스토돈 서브 장르 텍스트 */}
       <Text
         x={rightSeparatorX + 22}
         y={480}

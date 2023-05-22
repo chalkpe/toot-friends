@@ -5,6 +5,7 @@ import {
   Badge,
   Button,
   Card,
+  Checkbox,
   Divider,
   Form,
   Input,
@@ -17,7 +18,7 @@ import {
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, expansions, jobs, progress, servers } from '../common'
+import { Config, expansions, jobs, orientations, progress, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -222,6 +223,9 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
               placeholder="가끔 언급하는 장르"
             />
           </Space>
+        </Form.Item>
+        <Form.Item label="툿 성향">
+          <Checkbox.Group options={orientations} value={config.orientations} />
         </Form.Item>
       </Space>
     ),
