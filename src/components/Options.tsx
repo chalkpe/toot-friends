@@ -141,7 +141,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             value={config.font}
             onChange={(font) => setConfig({ ...config, font })}
             placeholder="폰트 이름을 입력하세요."
-            options={['NanumBarunpen', 'Noto Sans KR'].map((font) => ({
+            options={['나눔바른펜', 'Noto Sans KR'].map((font) => ({
               value: font,
               label: <span style={{ fontFamily: font }}>{font}</span>,
             }))}

@@ -16,7 +16,7 @@ export type Config = {
 
 export const defaultConfig: Config = {
   color: 'black',
-  font: 'NanumBarunpen',
+  font: '나눔바른펜',
   name: '초크',
   server: '초코보',
   title: '궁극의 전설',
