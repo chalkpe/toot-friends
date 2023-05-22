@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "툿친소 시트 메이커",
+  "name": "툿친소 시트 메이커",
   "icons": [
     {
       "src": "favicon.ico",

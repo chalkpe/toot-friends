@@ -186,6 +186,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
       </Space>
     ),
+
     mastodon: (
       <Space direction="vertical">
         <Form.Item label="정보">
