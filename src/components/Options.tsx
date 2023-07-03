@@ -3,7 +3,7 @@ import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Inp
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, expansions, jobs, orientations, progress, servers } from '../common'
+import { Config, avoids, coupling, expansions, jobs, orientations, progress, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -170,7 +170,13 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           </Space>
         </Form.Item>
         <Form.Item label="툿 성향">
-          <Checkbox.Group options={orientations} value={config.orientations} />
+          <Checkbox.Group options={orientations} value={config.orientations} onChange={(values) => setConfig({ ...config, orientations: values.map((x) => x.toString()) })} />
+        </Form.Item>
+        <Form.Item label="커플링 성향">
+          <Checkbox.Group options={coupling} value={config.couplings} onChange={(values) => setConfig({ ...config, couplings: values.map((x) => x.toString()) })} />
+        </Form.Item>
+        <Form.Item label="기피 소재">
+          <Checkbox.Group options={avoids} value={config.avoids} onChange={(values) => setConfig({ ...config, avoids: values.map((x) => x.toString()) })} />
         </Form.Item>
       </Space>
     ),

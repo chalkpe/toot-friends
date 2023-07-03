@@ -17,6 +17,8 @@ export type Config = {
   mastodonMain: string
   mastodonSub: string
   orientations: string[]
+  couplings: string[]
+  avoids: string[]
 }
 
 export const defaultConfig: Config = {
@@ -38,6 +40,8 @@ export const defaultConfig: Config = {
   mastodonMain: '파판14',
   mastodonSub: '명일방주',
   orientations: [],
+  couplings: [],
+  avoids: [],
 }
 
 export const progress = [
@@ -191,6 +195,16 @@ export const servers = [
 ]
 
 export const orientations = ['부스트', '관심글', '일상', '자캐', '덕질', '로컬', '연합'].map((x) => ({
+  label: x,
+  value: x,
+}))
+
+export const coupling = ['HL', 'BL', 'GL', '드림', '논커플링', '올라운더', '1차창작', '2차창작'].map((x) => ({
+  label: x,
+  value: x,
+}))
+
+export const avoids = ['고어', '스포일러', '리버스', '리버시블', '드림', '겹드림', 'RPS'].map((x) => ({
   label: x,
   value: x,
 }))
