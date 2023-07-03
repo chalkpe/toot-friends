@@ -7,7 +7,8 @@ import { Image, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
 import useImage from 'use-image'
 
-import { Config } from '../common'
+import { Config, jobsByRole } from '../common'
+import JobIcon from './canvas/JobIcon'
 
 const sceneWidth = 1920
 const sceneHeight = 1080
@@ -30,6 +31,9 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
   const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
   const [expansion] = useImage(`./expansions/${config.expansion}.png`, 'anonymous')
+
+  const [like] = useImage('./ui/like.png', 'anonymous')
+  const [dislike] = useImage('./ui/dislike.png', 'anonymous')
 
   const resize = useCallback((scale: number) => {
     const stage = ref.current
@@ -76,12 +80,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const image = (
     <>
       {/* 유저 이미지 */}
-      <Image
-        image={userImage}
-        scale={{ x: config.scale, y: config.scale }}
-        x={imageOffset.x - (sceneWidth / 2 - leftRectWidth / 2)}
-        y={imageOffset.y}
-      />
+      <Image image={userImage} scale={{ x: config.scale, y: config.scale }} x={imageOffset.x - (sceneWidth / 2 - leftRectWidth / 2)} y={imageOffset.y} />
 
       {/* 배경 이미지 */}
       <Image image={config.color === 'white' ? white : black} />
@@ -94,40 +93,13 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       <Image image={job} x={leftRectWidth / 2 - 40} y={810} width={80} height={80} />
 
       {/* 칭호 */}
-      <Text
-        width={leftRectWidth}
-        x={0}
-        y={900}
-        text={config.title}
-        align="center"
-        fontFamily={fontFamily}
-        fontSize={24}
-        fill={'#b3b3b3'}
-      />
+      <Text width={leftRectWidth} x={0} y={900} text={config.title} align="center" fontFamily={fontFamily} fontSize={24} fill={'#b3b3b3'} />
 
       {/* 이름 */}
-      <Text
-        width={leftRectWidth}
-        x={0}
-        y={940}
-        text={config.name}
-        align="center"
-        fontFamily={fontFamily}
-        fontSize={48}
-        fill={'white'}
-      />
+      <Text width={leftRectWidth} x={0} y={940} text={config.name} align="center" fontFamily={fontFamily} fontSize={48} fill={'white'} />
 
       {/* 서버 */}
-      <Text
-        width={leftRectWidth}
-        x={0}
-        y={990}
-        text={config.server}
-        align="center"
-        fontFamily={fontFamily}
-        fontSize={36}
-        fill={'#8b8b8b'}
-      />
+      <Text width={leftRectWidth} x={0} y={990} text={config.server} align="center" fontFamily={fontFamily} fontSize={36} fill={'#8b8b8b'} />
     </>
   )
 
@@ -152,19 +124,65 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       {Array.from(Array(50)).map((_, i, a) => {
         const invert = i % 2 !== 0 ? 0.5 : -0.5
         const step = (1844 - rightBoxStartX) / a.length
-        return (
-          <Line
-            key={i}
-            points={[
-              rightBoxStartX + step * i,
-              900 - invert * step,
-              rightBoxStartX + step * (i + 1),
-              900 + invert * step,
-            ]}
-            stroke={lineColor}
-          />
-        )
+        return <Line key={i} points={[rightBoxStartX + step * i, 900 - invert * step, rightBoxStartX + step * (i + 1), 900 + invert * step]} stroke={lineColor} />
       })}
+    </>
+  )
+
+  const jobStartX = rightBoxStartX + 240
+  const jobIconSize = 60
+  const jobPaddingSize = 50
+
+  const jobs = (
+    <>
+      {/* 탱커 */}
+      {jobsByRole.tank.map((job, index) => (
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40} iconPath={job} colorType="tank" />
+      ))}
+
+      {/* 힐러 */}
+      {jobsByRole.healer.map((job, index) => (
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType="healer" />
+      ))}
+
+      {/* 딜러 */}
+      {jobsByRole.dps.map((job, index) => (
+        <JobIcon
+          width={jobIconSize}
+          height={jobIconSize}
+          x={jobStartX + jobPaddingSize * (1 + jobsByRole.healer.length + jobsByRole.tank.length) + index * jobPaddingSize}
+          y={40}
+          iconPath={job}
+          colorType="dps"
+        />
+      ))}
+
+      {/* 제작자 */}
+      {jobsByRole.crafter.map((job, index) => (
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType="crafter" />
+      ))}
+
+      {/* 채집가 */}
+      {jobsByRole.gatherer.map((job, index) => (
+        <JobIcon
+          width={jobIconSize}
+          height={jobIconSize}
+          x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.crafter.length) + index * jobPaddingSize}
+          y={40 + jobIconSize}
+          iconPath={job}
+          colorType="gatherer"
+        />
+      ))}
+    </>
+  )
+
+  const likes = (
+    <>
+      <Image image={like} x={620} y={620} height={70} width={70} />
+      <Text x={620 + 100} y={620 + 12} text={config.like} fontFamily={fontFamily} fontSize={42} fill={textColor} />
+
+      <Image image={dislike} x={620} y={770} height={70} width={70} />
+      <Text x={620 + 100} y={770 + 12} text={config.dislike} fontFamily={fontFamily} fontSize={42} fill={textColor} />
     </>
   )
 
@@ -174,15 +192,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       <Text x={600} y={220} text="메인 퀘스트" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} />
 
       {/* 메인 퀘스트 진행도 이미지 */}
-      {expansion && (
-        <Image
-          image={expansion}
-          x={1310 - (105 * expansion.width) / expansion.height}
-          y={215}
-          height={105}
-          width={(105 * expansion.width) / expansion.height}
-        />
-      )}
+      {expansion && <Image image={expansion} x={1310 - (105 * expansion.width) / expansion.height} y={215} height={105} width={(105 * expansion.width) / expansion.height} />}
 
       {/* 메인 퀘스트 진행도 */}
       <Text x={600} y={265} text={config.progress} fontFamily={fontFamily} fontSize={48} fill={textColor} />
@@ -192,64 +202,20 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const mastodon = (
     <>
       {/* 마스토돈 계정명 */}
-      <Text
-        x={rightSeparatorX + 22}
-        y={225}
-        text={config.mastodonName}
-        fontFamily={fontFamily}
-        fontSize={48}
-        fill={textColor}
-      />
+      <Text x={rightSeparatorX + 22} y={225} text={config.mastodonName} fontFamily={fontFamily} fontSize={48} fill={textColor} />
 
       {/* 마스토돈 핸들 */}
-      <Text
-        x={rightSeparatorX + 22}
-        y={280}
-        text={config.handle}
-        fontFamily={fontFamily}
-        fontSize={36}
-        fill={textColor}
-      />
+      <Text x={rightSeparatorX + 22} y={280} text={config.handle} fontFamily={fontFamily} fontSize={36} fill={textColor} />
 
       {/* 마스토돈 주 장르 레이블 */}
-      <Text
-        x={rightSeparatorX + 22}
-        y={350}
-        text="MAIN"
-        fontFamily={'KoPub Dotum'}
-        fontSize={30}
-        fill={textColor}
-        fontStyle="bold"
-      />
+      <Text x={rightSeparatorX + 22} y={350} text="MAIN" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 주 장르 텍스트 */}
-      <Text
-        x={rightSeparatorX + 22}
-        y={390}
-        text={config.mastodonMain}
-        fontFamily={fontFamily}
-        fontSize={30}
-        fill={textColor}
-      />
+      <Text x={rightSeparatorX + 22} y={390} text={config.mastodonMain} fontFamily={fontFamily} fontSize={30} fill={textColor} />
 
       {/* 마스토돈 서브 장르 레이블 */}
-      <Text
-        x={rightSeparatorX + 22}
-        y={440}
-        text="ETC"
-        fontFamily={'KoPub Dotum'}
-        fontSize={30}
-        fill={textColor}
-        fontStyle="bold"
-      />
+      <Text x={rightSeparatorX + 22} y={440} text="ETC" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 서브 장르 텍스트 */}
-      <Text
-        x={rightSeparatorX + 22}
-        y={480}
-        text={config.mastodonSub}
-        fontFamily={fontFamily}
-        fontSize={30}
-        fill={textColor}
-      />
+      <Text x={rightSeparatorX + 22} y={480} text={config.mastodonSub} fontFamily={fontFamily} fontSize={30} fill={textColor} />
     </>
   )
 
@@ -269,16 +235,13 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         </Button>
       }
     >
-      <Stage
-        ref={ref}
-        width={sceneWidth}
-        height={sceneHeight}
-        style={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8, overflow: 'hidden' }}
-      >
+      <Stage ref={ref} width={sceneWidth} height={sceneHeight} style={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8, overflow: 'hidden' }}>
         <Layer>
           {image}
           {lines}
           {leftRect}
+          {jobs}
+          {likes}
           {progress}
           {mastodon}
 
@@ -291,8 +254,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
             draggable
             onDragEnd={(e) => e.target.to({ x: 0, y: 0 })}
             onDragMove={(e) => {
-              if (Number.isFinite(e.evt.movementX) && Number.isFinite(e.evt.movementY))
-                setImageOffset({ x: imageOffset.x + e.evt.movementX, y: imageOffset.y + e.evt.movementY })
+              if (Number.isFinite(e.evt.movementX) && Number.isFinite(e.evt.movementY)) setImageOffset({ x: imageOffset.x + e.evt.movementX, y: imageOffset.y + e.evt.movementY })
             }}
           ></Rect>
         </Layer>

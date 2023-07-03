@@ -7,7 +7,7 @@ export type Config = {
   image: any
   scale: number
   job: string
-  progress: string,
+  progress: string
   expansion: string
   like: string
   dislike: string
@@ -35,7 +35,7 @@ export const defaultConfig: Config = {
   handle: '@chalk@chalk.moe',
   mastodonMain: '파판14',
   mastodonSub: '명일방주',
-  orientations: []
+  orientations: [],
 }
 
 export const progress = [
@@ -64,7 +64,7 @@ export const progress = [
   { label: 'v6.0 효월의 종언', value: 'v6.0 완료' },
   { label: 'v6.1 새로운 모험', value: 'v6.1 완료' },
   { label: 'v6.2 금단의 기억', value: 'v6.2 완료' },
-  { label: 'v6.3 하늘의 축제, 땅의 명동', value: 'v6.3 완료' },
+  { label: 'v6.3 하늘의 축제, 땅의 전율', value: 'v6.3 완료' },
   { label: 'v6.4 옥좌의 죄인', value: 'v6.4 완료' },
 ]
 
@@ -115,6 +115,27 @@ export const jobs = [
   'botanist',
   'fisher',
 ]
+
+export const jobsByRole = {
+  tank: ['paladin', 'warrior', 'darkknight', 'gunbreaker'],
+  healer: ['whitemage', 'scholar', 'astrologian', 'sage'],
+  dps: [
+    'monk',
+    'dragoon',
+    'ninja',
+    'samurai',
+    'reaper',
+    'bard',
+    'machinist',
+    'dancer',
+    'blackmage',
+    'summoner',
+    'redmage',
+    'bluemage',
+  ],
+  crafter: ['carpenter', 'blacksmith', 'armorer', 'goldsmith', 'leatherworker', 'weaver', 'alchemist', 'culinarian'],
+  gatherer: ['miner', 'botanist', 'fisher'],
+}
 
 export const servers = [
   {
@@ -167,7 +188,10 @@ export const servers = [
   },
 ]
 
-export const orientations = ['부스트', '관심글', '일상', '자캐', '덕질', '로컬', '연합'].map((x) => ({ label: x, value: x }))
+export const orientations = ['부스트', '관심글', '일상', '자캐', '덕질', '로컬', '연합'].map((x) => ({
+  label: x,
+  value: x,
+}))
 
 // 플레이 스타일
 // https://xivapi.com/docs/Icons?set=icons061000
