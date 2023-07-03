@@ -28,7 +28,7 @@ export const defaultConfig: Config = {
   image: null,
   scale: 1,
   job: 'summoner',
-  jobs: ['summoner', 'redmage', 'bluemage'],
+  jobs: ['warrior', 'whitemage', 'ninja', 'reaper', 'summoner', 'redmage', 'goldsmith', 'alchemist', 'culinarian', 'miner'],
   progress: 'v6.2 완료',
   expansion: 'endwalker',
   like: '절 영식',
