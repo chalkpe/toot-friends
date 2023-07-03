@@ -1,20 +1,5 @@
 import { FC, useState } from 'react'
-import {
-  AutoComplete,
-  Avatar,
-  Badge,
-  Button,
-  Card,
-  Checkbox,
-  Divider,
-  Form,
-  Input,
-  Radio,
-  Select,
-  Slider,
-  Space,
-  Upload,
-} from 'antd'
+import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Input, Radio, Select, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
@@ -36,9 +21,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             accept="image/*"
             listType="picture"
             maxCount={1}
-            defaultFileList={
-              config.image ? [{ uid: '1', name: 'image.png', url: config.image, status: 'done' }] : undefined
-            }
+            defaultFileList={config.image ? [{ uid: '1', name: 'image.png', url: config.image, status: 'done' }] : undefined}
             beforeUpload={() => false}
             onRemove={() => setConfig({ ...config, image: null })}
             onChange={(info) => {
@@ -54,31 +37,14 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="카드 이미지 확대/축소">
-          <Slider
-            min={0}
-            max={2}
-            step={0.01}
-            tooltip={{ formatter: (value) => `${Math.floor((value ?? 0) * 100)}%` }}
-            defaultValue={config.scale}
-            onChange={(scale) => setConfig({ ...config, scale })}
-          />
+          <Slider min={0} max={2} step={0.01} tooltip={{ formatter: (value) => `${Math.floor((value ?? 0) * 100)}%` }} defaultValue={config.scale} onChange={(scale) => setConfig({ ...config, scale })} />
         </Form.Item>
 
         <Form.Item label="대표 직업">
           <Space size="small" wrap>
             {jobs.map((job, index) => {
               if (!job) return <Divider key={index} type="vertical" />
-
-              const image = (
-                <Avatar
-                  key={job}
-                  size="small"
-                  shape="square"
-                  alt={job}
-                  src={`./icons/${job}.png`}
-                  onClick={() => setConfig({ ...config, job })}
-                />
-              )
+              const image = <Avatar key={job} size="small" shape="square" alt={job} src={`./icons/${job}.png`} onClick={() => setConfig({ ...config, job })} />
 
               return job === config.job ? (
                 <Badge dot key={job}>
@@ -93,11 +59,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
 
         <Form.Item label="캐릭터 정보">
           <Space.Compact style={{ width: '100%' }}>
-            <Input
-              value={config.name}
-              onChange={(e) => setConfig({ ...config, name: e.target.value })}
-              placeholder="닉네임"
-            />
+            <Input value={config.name} onChange={(e) => setConfig({ ...config, name: e.target.value })} placeholder="닉네임" />
             <AutoComplete
               value={config.server}
               onChange={(server) => setConfig({ ...config, server })}
@@ -106,15 +68,9 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
                 ...server,
                 options: server.options.map((o) => ({ label: o, value: o })),
               }))}
-              filterOption={(inputValue, option) =>
-                option?.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
-              }
+              filterOption={(inputValue, option) => option?.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1}
             />
-            <Input
-              value={config.title}
-              onChange={(e) => setConfig({ ...config, title: e.target.value })}
-              placeholder="칭호"
-            />
+            <Input value={config.title} onChange={(e) => setConfig({ ...config, title: e.target.value })} placeholder="칭호" />
           </Space.Compact>
         </Form.Item>
       </Space>
@@ -153,38 +109,47 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
 
     ffxiv: (
       <Space direction="vertical">
+        <Form.Item label="선호 직업">
+          <Space size="small" wrap>
+            {jobs.map((job, index) => {
+              if (!job) return <Divider key={index} type="vertical" />
+              const image = (
+                <Avatar
+                  key={job}
+                  size="small"
+                  shape="square"
+                  alt={job}
+                  src={`./icons/${job}.png`}
+                  onClick={() =>
+                    setConfig({
+                      ...config,
+                      jobs: config.jobs.includes(job) ? config.jobs.filter((j) => j !== job) : [...config.jobs, job],
+                    })
+                  }
+                />
+              )
+
+              return config.jobs.includes(job) ? (
+                <Badge dot key={job}>
+                  {image}
+                </Badge>
+              ) : (
+                image
+              )
+            })}
+          </Space>
+        </Form.Item>
+
         <Form.Item label="메인 퀘스트 진도">
           <Space wrap>
-            <Select
-              style={{ width: 225 }}
-              value={config.progress}
-              onChange={(progress) => setConfig({ ...config, progress })}
-              placeholder="예시) v6.3 완료"
-              options={progress}
-            />
-            <Select
-              style={{ width: 150 }}
-              value={config.expansion}
-              onChange={(expansion) => setConfig({ ...config, expansion })}
-              placeholder="확장팩"
-              options={expansions}
-            />
+            <Select style={{ width: 225 }} value={config.progress} onChange={(progress) => setConfig({ ...config, progress })} placeholder="예시) v6.3 완료" options={progress} />
+            <Select style={{ width: 150 }} value={config.expansion} onChange={(expansion) => setConfig({ ...config, expansion })} placeholder="확장팩" options={expansions} />
           </Space>
         </Form.Item>
         <Form.Item label="선호 설정">
           <Space wrap>
-            <Input
-              style={{ width: 300 }}
-              value={config.like}
-              onChange={(e) => setConfig({ ...config, like: e.target.value })}
-              placeholder="좋아요"
-            />
-            <Input
-              style={{ width: 300 }}
-              value={config.dislike}
-              onChange={(e) => setConfig({ ...config, dislike: e.target.value })}
-              placeholder="싫어요"
-            />
+            <Input style={{ width: 300 }} value={config.like} onChange={(e) => setConfig({ ...config, like: e.target.value })} placeholder="좋아요" />
+            <Input style={{ width: 300 }} value={config.dislike} onChange={(e) => setConfig({ ...config, dislike: e.target.value })} placeholder="싫어요" />
           </Space>
         </Form.Item>
       </Space>
@@ -194,34 +159,14 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
       <Space direction="vertical">
         <Form.Item label="정보">
           <Space wrap>
-            <Input
-              style={{ width: 300 }}
-              value={config.mastodonName}
-              onChange={(e) => setConfig({ ...config, mastodonName: e.target.value })}
-              placeholder="마스토돈 계정명"
-            />
-            <Input
-              style={{ width: 300 }}
-              value={config.handle}
-              onChange={(e) => setConfig({ ...config, handle: e.target.value })}
-              placeholder="핸들 (예시: @chalk@chalk.moe)"
-            />
+            <Input style={{ width: 300 }} value={config.mastodonName} onChange={(e) => setConfig({ ...config, mastodonName: e.target.value })} placeholder="마스토돈 계정명" />
+            <Input style={{ width: 300 }} value={config.handle} onChange={(e) => setConfig({ ...config, handle: e.target.value })} placeholder="핸들 (예시: @chalk@chalk.moe)" />
           </Space>
         </Form.Item>
         <Form.Item label="장르">
           <Space wrap>
-            <Input
-              style={{ width: 300 }}
-              value={config.mastodonMain}
-              onChange={(e) => setConfig({ ...config, mastodonMain: e.target.value })}
-              placeholder="주로 언급하는 장르"
-            />
-            <Input
-              style={{ width: 300 }}
-              value={config.mastodonSub}
-              onChange={(e) => setConfig({ ...config, mastodonSub: e.target.value })}
-              placeholder="가끔 언급하는 장르"
-            />
+            <Input style={{ width: 300 }} value={config.mastodonMain} onChange={(e) => setConfig({ ...config, mastodonMain: e.target.value })} placeholder="주로 언급하는 장르" />
+            <Input style={{ width: 300 }} value={config.mastodonSub} onChange={(e) => setConfig({ ...config, mastodonSub: e.target.value })} placeholder="가끔 언급하는 장르" />
           </Space>
         </Form.Item>
         <Form.Item label="툿 성향">

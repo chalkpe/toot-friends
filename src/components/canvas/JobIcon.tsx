@@ -9,6 +9,7 @@ const colors = {
   dps: [202, 73, 75] as const,
   crafter: [140, 108, 194] as const,
   gatherer: [210, 191, 88] as const,
+  disabled: [86, 86, 86] as const,
 }
 
 interface JobIconProps extends Omit<ComponentProps<typeof Image>, 'image'> {

@@ -137,41 +137,27 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     <>
       {/* 탱커 */}
       {jobsByRole.tank.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40} iconPath={job} colorType="tank" />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'tank' : 'disabled'} />
       ))}
 
       {/* 힐러 */}
       {jobsByRole.healer.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType="healer" />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'healer' : 'disabled'} />
       ))}
 
       {/* 딜러 */}
       {jobsByRole.dps.map((job, index) => (
-        <JobIcon
-          width={jobIconSize}
-          height={jobIconSize}
-          x={jobStartX + jobPaddingSize * (1 + jobsByRole.healer.length + jobsByRole.tank.length) + index * jobPaddingSize}
-          y={40}
-          iconPath={job}
-          colorType="dps"
-        />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (1 + jobsByRole.healer.length + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'dps' : 'disabled'} />
       ))}
 
       {/* 제작자 */}
       {jobsByRole.crafter.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType="crafter" />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'crafter' : 'disabled'} />
       ))}
 
       {/* 채집가 */}
       {jobsByRole.gatherer.map((job, index) => (
-        <JobIcon
-          width={jobIconSize}
-          height={jobIconSize}
-          x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.crafter.length) + index * jobPaddingSize}
-          y={40 + jobIconSize}
-          iconPath={job}
-          colorType="gatherer"
-        />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.crafter.length) + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'gatherer' : 'disabled'} />
       ))}
     </>
   )

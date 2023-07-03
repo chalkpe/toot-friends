@@ -7,6 +7,7 @@ export type Config = {
   image: any
   scale: number
   job: string
+  jobs: string[]
   progress: string
   expansion: string
   like: string
@@ -27,6 +28,7 @@ export const defaultConfig: Config = {
   image: null,
   scale: 1,
   job: 'summoner',
+  jobs: ['summoner', 'redmage', 'bluemage'],
   progress: 'v6.2 완료',
   expansion: 'endwalker',
   like: '절 영식',
