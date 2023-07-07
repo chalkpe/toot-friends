@@ -9,10 +9,7 @@ WebFont.load({
   google: { families: ['Noto Sans KR'] },
   custom: {
     families: ['나눔바른펜', 'KoPub Dotum'],
-    urls: [
-      'https://unpkg.com/@kfonts/nanum-barun-pen-otf/index.css',
-      'https://cdn.jsdelivr.net/npm/font-kopub@1.0/kopubdotum.min.css',
-    ],
+    urls: ['https://unpkg.com/@kfonts/nanum-barun-pen-otf/index.css', 'https://cdn.jsdelivr.net/npm/font-kopub@1.0/kopubdotum.min.css'],
   },
 
   active: () => {
