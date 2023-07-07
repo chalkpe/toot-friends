@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Input, Radio, Select, Slider, Space, Upload } from 'antd'
+import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Col, Divider, Form, Input, Radio, Row, Select, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
@@ -151,6 +151,23 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             <Input style={{ width: 300 }} value={config.like} onChange={(e) => setConfig({ ...config, like: e.target.value })} placeholder="좋아요" />
             <Input style={{ width: 300 }} value={config.dislike} onChange={(e) => setConfig({ ...config, dislike: e.target.value })} placeholder="싫어요" />
           </Space>
+        </Form.Item>
+
+        <Form.Item label="플레이 시간대">
+          <Checkbox.Group onChange={(group) => setConfig({ ...config, playtime: Array.from(Array(24)).map((_, index) => group.includes(index)) })}>
+            <Space direction="vertical">
+              <Space>
+                {Array.from(Array(12)).map((_, index) => (
+                  <Checkbox value={index}>{index.toString().padStart(2, '0')}시</Checkbox>
+                ))}
+              </Space>
+              <Space>
+                {Array.from(Array(12)).map((_, index) => (
+                  <Checkbox value={index + 12}>{index + 12}시</Checkbox>
+                ))}
+              </Space>
+            </Space>
+          </Checkbox.Group>
         </Form.Item>
       </Space>
     ),

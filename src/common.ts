@@ -19,6 +19,7 @@ export type Config = {
   orientations: string[]
   couplings: string[]
   avoids: string[]
+  playtime: boolean[]
 }
 
 export const defaultConfig: Config = {
@@ -42,6 +43,7 @@ export const defaultConfig: Config = {
   orientations: [],
   couplings: [],
   avoids: [],
+  playtime: Array(24).fill(false)
 }
 
 export const progress = [

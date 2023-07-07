@@ -3,7 +3,7 @@ import { FC, useCallback, useMemo, useState, useEffect, useRef } from 'react'
 import { Button, Card, Space } from 'antd'
 import { DownloadOutlined, InfoCircleOutlined } from '@ant-design/icons'
 
-import { Image, Layer, Line, Rect, Stage, Text } from 'react-konva'
+import { Arc, Image, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
 import useImage from 'use-image'
 
@@ -205,6 +205,17 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     </>
   )
 
+  const times = (
+    <>
+      {/* 플레이 시간 파이 차트 */}
+      {config.playtime.map((play, index) => (
+        <Arc angle={360 / config.playtime.length + 0.5} rotationDeg={-90 + 360 * (index / config.playtime.length)} innerRadius={60} outerRadius={90} x={700} y={460} fill={play ? (index < 12 ? '#45c4f1' : '#f1a251') : '#d2d2d2'} />
+      ))}
+
+      <Text text="오후/오전" x={625} y={450} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
+    </>
+  )
+
   return (
     <Card
       hoverable
@@ -230,6 +241,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {likes}
           {progress}
           {mastodon}
+          {times}
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect
