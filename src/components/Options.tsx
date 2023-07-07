@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Col, Divider, Form, Input, Radio, Row, Select, Slider, Space, Upload } from 'antd'
+import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Input, Radio, Select, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
@@ -154,7 +154,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="플레이 시간대">
-          <Checkbox.Group onChange={(group) => setConfig({ ...config, playtime: Array.from(Array(24)).map((_, index) => group.includes(index)) })}>
+          <Checkbox.Group value={config.playtime.map((_, index) => index).filter((index) => config.playtime[index])} onChange={(group) => setConfig({ ...config, playtime: Array.from(Array(24)).map((_, index) => group.includes(index)) })}>
             <Space direction="vertical">
               <Space>
                 {Array.from(Array(12)).map((_, index) => (
