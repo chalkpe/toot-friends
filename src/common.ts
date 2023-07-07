@@ -43,7 +43,7 @@ export const defaultConfig: Config = {
   orientations: [],
   couplings: [],
   avoids: [],
-  playtime: Array(24).fill(false)
+  playtime: Array(24).fill(false),
 }
 
 export const progress = [
@@ -200,3 +200,40 @@ export const avoids = ['고어', '스포일러', '리버스', '리버시블', '�
 
 // 플레이 스타일
 // https://xivapi.com/docs/Icons?set=icons061000
+
+export const playstyles = {
+  mainscenario: '주요 퀘스트',
+  dungeons: '던전',
+  trials: '토벌전',
+  raids: '레이드',
+  ultimateraids: '절 레이드',
+  deepdungeons: '딥 던전',
+  fieldoperations: '특수 필드 탐색',
+  vandcdungeons: '특수 던전 탐색',
+  pvp: 'PvP',
+  dutyroulette: '무작위 임무',
+  bluemage: '청마도사',
+  treasurehunts: '보물찾기',
+  thehunt: '마물 사냥',
+  goldsaucer: '골드 소서',
+  domanmahjong: '작패유희',
+  islandsanctuary: '무인도 개척',
+  crafting: '제작',
+  botanymining: '채광/원예',
+  fishing: '낚시',
+  leveling: '레벨 올리기',
+  roleplaying: '역할극',
+  casual: '부담 없이 즐기기',
+  hardcore: '진지한 공략',
+  newadventurer: '초보자',
+  mentor: '멘토',
+  makinggil: '길 모으기',
+  achievements: '업적 수집',
+  housing: '하우징',
+  performancemode: '악기 연주',
+  glamour: '장비 투영',
+  grouppose: '단체 자세',
+  playerchat: '대화 나누기',
+  communityevents: '플레이어 이벤트',
+  // none: '없음',
+}

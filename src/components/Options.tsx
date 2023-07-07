@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
-import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Input, Radio, Select, Slider, Space, Upload } from 'antd'
+import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Image, Input, Radio, Select, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, avoids, coupling, expansions, jobs, orientations, progress, servers } from '../common'
+import { Config, avoids, coupling, expansions, jobs, orientations, playstyles, progress, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -166,6 +166,19 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
                   <Checkbox value={index + 12}>{index + 12}시</Checkbox>
                 ))}
               </Space>
+            </Space>
+          </Checkbox.Group>
+        </Form.Item>
+
+        <Form.Item label="플레이 스타일">
+          <Checkbox.Group>
+            <Space wrap>
+              {Object.entries(playstyles).map(([playstyle, displayName]) => (
+                <Checkbox value={playstyle}>
+                  <Image src={`playstyles/${playstyle}.png`} preview={false} width={32} />
+                  &nbsp;{displayName}
+                </Checkbox>
+              ))}
             </Space>
           </Checkbox.Group>
         </Form.Item>
