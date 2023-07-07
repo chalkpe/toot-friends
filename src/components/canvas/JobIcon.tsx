@@ -6,7 +6,7 @@ import useImage from 'use-image'
 const colors = {
   tank: [98, 116, 244] as const,
   healer: [99, 154, 41] as const,
-  dps: [202, 73, 75] as const,
+  dps: [255, 87, 90] as const,
   crafter: [140, 108, 194] as const,
   gatherer: [210, 191, 88] as const,
   disabled: [86, 86, 86] as const,
