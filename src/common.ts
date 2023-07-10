@@ -20,6 +20,8 @@ export type Config = {
   couplings: string[]
   avoids: string[]
   playtime: boolean[]
+  playstyles: string[]
+  comment: string
 }
 
 export const defaultConfig: Config = {
@@ -44,6 +46,8 @@ export const defaultConfig: Config = {
   couplings: [],
   avoids: [],
   playtime: Array(24).fill(false),
+  playstyles: [],
+  comment: '잘 부탁합니다!',
 }
 
 export const progress = [

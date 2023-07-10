@@ -73,6 +73,10 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             <Input value={config.title} onChange={(e) => setConfig({ ...config, title: e.target.value })} placeholder="칭호" />
           </Space.Compact>
         </Form.Item>
+
+        <Form.Item label="한마디">
+          <Input.TextArea value={config.comment} onChange={(e) => setConfig({ ...config, comment: e.target.value })} placeholder="한마디" />
+        </Form.Item>
       </Space>
     ),
 
@@ -171,7 +175,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="플레이 스타일">
-          <Checkbox.Group>
+          <Checkbox.Group value={config.playstyles} onChange={(values) => setConfig({ ...config, playstyles: values.map((v) => v.toString()).slice(0, 10) })}>
             <Space wrap>
               {Object.entries(playstyles).map(([playstyle, displayName]) => (
                 <Checkbox value={playstyle}>

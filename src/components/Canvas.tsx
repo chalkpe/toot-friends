@@ -8,7 +8,9 @@ import { Stage as StageRef } from 'konva/lib/Stage'
 import useImage from 'use-image'
 
 import { Config, jobsByRole } from '../common'
+
 import JobIcon from './canvas/JobIcon'
+import PlaystyleIcon from './canvas/PlaystyleIcon'
 
 const sceneWidth = 1920
 const sceneHeight = 1080
@@ -162,16 +164,6 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     </>
   )
 
-  const likes = (
-    <>
-      <Image image={like} x={620} y={620} height={70} width={70} />
-      <Text x={620 + 100} y={620 + 12} text={config.like} fontFamily={fontFamily} fontSize={42} fill={textColor} />
-
-      <Image image={dislike} x={620} y={770} height={70} width={70} />
-      <Text x={620 + 100} y={770 + 12} text={config.dislike} fontFamily={fontFamily} fontSize={42} fill={textColor} />
-    </>
-  )
-
   const progress = (
     <>
       {/* 메인 퀘스트 진행도 레이블 */}
@@ -182,6 +174,43 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
       {/* 메인 퀘스트 진행도 */}
       <Text x={600} y={265} text={config.progress} fontFamily={fontFamily} fontSize={48} fill={textColor} />
+    </>
+  )
+
+  const times = (
+    <>
+      {/* 플레이 시간 파이 차트 */}
+      {config.playtime.map((play, index) => (
+        <Arc angle={360 / config.playtime.length + 0.5} rotationDeg={-90 + 360 * (index / config.playtime.length)} innerRadius={60} outerRadius={90} x={700} y={460} fill={play ? (index < 12 ? '#45c4f1' : '#f1a251') : '#d2d2d2'} />
+      ))}
+
+      <Text text="0" x={625} y={450 - 40} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
+      <Text text="6" x={625 + 40} y={450} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
+      <Text text="12" x={625} y={450 + 40} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
+      <Text text="18" x={625 - 40} y={450} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
+    </>
+  )
+
+  const playstyle = (
+    <>
+      {Array.from(Array(5)).map((_, i) => (
+        <PlaystyleIcon x={835 + 95 * i} y={370} iconPath={config.playstyles[i]} />
+      ))}
+      {Array.from(Array(5)).map((_, i) => (
+        <PlaystyleIcon x={835 + 95 * i} y={465} iconPath={config.playstyles[i + 5]} />
+      ))}
+    </>
+  )
+
+  const likes = (
+    <>
+      {/* 좋아요 */}
+      <Image image={like} x={620} y={620} height={70} width={70} />
+      <Text x={620 + 100} y={620 + 12} text={config.like} fontFamily={fontFamily} fontSize={42} fill={textColor} />
+
+      {/* 싫어요 */}
+      <Image image={dislike} x={620} y={770} height={70} width={70} />
+      <Text x={620 + 100} y={770 + 12} text={config.dislike} fontFamily={fontFamily} fontSize={42} fill={textColor} />
     </>
   )
 
@@ -205,14 +234,29 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     </>
   )
 
-  const times = (
+  const orientations = (
     <>
-      {/* 플레이 시간 파이 차트 */}
-      {config.playtime.map((play, index) => (
-        <Arc angle={360 / config.playtime.length + 0.5} rotationDeg={-90 + 360 * (index / config.playtime.length)} innerRadius={60} outerRadius={90} x={700} y={460} fill={play ? (index < 12 ? '#45c4f1' : '#f1a251') : '#d2d2d2'} />
-      ))}
+      {/* 마스토돈 툿 성향 레이블 */}
+      <Text x={rightSeparatorX + 22} y={575} text="툿 성향" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      {/* 마스토돈 툿 성향 텍스트 */}
+      <Text x={rightSeparatorX + 22} y={615} text={config.orientations.length ? config.orientations.join(' | ') : '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
 
-      <Text text="오후/오전" x={625} y={450} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
+      {/* 마스토돈 커플링 성향 레이블 */}
+      <Text x={rightSeparatorX + 22} y={675} text="커플링 성향" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      {/* 마스토돈 커플링 성향 텍스트 */}
+      <Text x={rightSeparatorX + 22} y={715} text={config.couplings.length ? config.couplings.join(' | ') : '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+
+      {/* 마스토돈 기피 소재 레이블 */}
+      <Text x={rightSeparatorX + 22} y={775} text="기피 소재" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      {/* 마스토돈 기피 소재 텍스트 */}
+      <Text x={rightSeparatorX + 22} y={815} text={config.avoids.length ? config.avoids.join(' | ') : '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+    </>
+  )
+
+  const comment = (
+    <>
+      <Text x={leftRectWidth + 30} y={950} text="한마디" fontFamily={fontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
+      <Text x={leftRectWidth + 170} y={940} width={1150} text={config.comment || '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
     </>
   )
 
@@ -241,7 +285,10 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {likes}
           {progress}
           {mastodon}
+          {orientations}
           {times}
+          {playstyle}
+          {comment}
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect
