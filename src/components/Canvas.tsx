@@ -256,7 +256,14 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const comment = (
     <>
       <Text x={leftRectWidth + 30} y={950} text="한마디" fontFamily={fontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
-      <Text x={leftRectWidth + 170} y={940} width={1150} text={config.comment || '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+      <Text x={leftRectWidth + 170} y={940} width={1150} text={config.comment || '-'} fontFamily={fontFamily} fontSize={36} fill={textColor} />
+    </>
+  )
+
+  const copyright = (
+    <>
+      <Text x={1540} y={1005} text="https://chalkpe.github.io/toot-friends/" fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text x={1500} y={1040} text="© SQUARE ENIX Co. LTD. All Right Reserved" fontFamily={fontFamily} fontSize={24} fill={textColor} />
     </>
   )
 
@@ -289,6 +296,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {times}
           {playstyle}
           {comment}
+          {copyright}
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect
