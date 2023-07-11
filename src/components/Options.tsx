@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
-import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Image, Input, Radio, Select, Slider, Space, Upload } from 'antd'
+import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Image, Input, InputNumber, Radio, Select, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, avoids, coupling, expansions, jobs, orientations, playstyles, progress, servers } from '../common'
+import { Config, avoids, companies, coupling, expansions, grades, jobs, orientations, playstyles, progress, servers } from '../common'
 
 interface OptionsProps {
   config: Config
@@ -156,6 +156,20 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Space wrap>
             <Input style={{ width: 300 }} value={config.like} onChange={(e) => setConfig({ ...config, like: e.target.value })} placeholder="좋아요" />
             <Input style={{ width: 300 }} value={config.dislike} onChange={(e) => setConfig({ ...config, dislike: e.target.value })} placeholder="싫어요" />
+          </Space>
+        </Form.Item>
+
+        <Form.Item label="총사령부">
+          <Space wrap>
+            <Select style={{ width: 150 }} value={config.company} onChange={(company) => setConfig({ ...config, company })} placeholder="총사령부" options={companies} />
+            <Select style={{ width: 150 }} value={config.grade} onChange={(grade) => setConfig({ ...config, grade })} placeholder="계급" options={grades} />
+          </Space>
+        </Form.Item>
+
+        <Form.Item label="특수 레벨">
+          <Space wrap>
+            <InputNumber style={{ width: 150 }} value={config.eurekaLevel} onChange={(eurekaLevel) => setConfig({ ...config, eurekaLevel: eurekaLevel || 0 })} placeholder="에우레카 레벨" />
+            <InputNumber style={{ width: 150 }} value={config.bozjaLevel} onChange={(bozjaLevel) => setConfig({ ...config, bozjaLevel: bozjaLevel || 0 })} placeholder="보즈야 레벨" />
           </Space>
         </Form.Item>
 

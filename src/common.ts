@@ -1,5 +1,5 @@
 export type Config = {
-  color: 'black' | 'white'
+  color: 'black' | 'white' | 'black2' | 'white2'
   font: string
   name: string
   server: string
@@ -10,6 +10,10 @@ export type Config = {
   jobs: string[]
   progress: string
   expansion: string
+  company: string
+  grade: string
+  eurekaLevel: number
+  bozjaLevel: number
   like: string
   dislike: string
   mastodonName: string
@@ -36,6 +40,10 @@ export const defaultConfig: Config = {
   jobs: [],
   progress: '',
   expansion: '',
+  company: '',
+  grade: '',
+  eurekaLevel: 0,
+  bozjaLevel: 0,
   like: '',
   dislike: '',
   mastodonName: '',
@@ -241,3 +249,13 @@ export const playstyles = {
   communityevents: '플레이어 이벤트',
   // none: '없음',
 }
+
+export const companies = ['불멸대', '쌍사당', '흑와단'].map((x) => ({
+  label: x,
+  value: x,
+}))
+
+export const grades = ['이병', '일병', '상병', '병장', '하사', '중사', '상사', '원사', '소위', '중위', '대위'].map((x) => ({
+  label: x,
+  value: x,
+}))

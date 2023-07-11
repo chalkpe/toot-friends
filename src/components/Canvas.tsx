@@ -11,6 +11,7 @@ import { Config, jobsByRole } from '../common'
 
 import JobIcon from './canvas/JobIcon'
 import PlaystyleIcon from './canvas/PlaystyleIcon'
+import LevelIcon from './canvas/LevelIcon'
 
 const sceneWidth = 1920
 const sceneHeight = 1080
@@ -25,12 +26,15 @@ interface CanvasProps {
 
 const Canvas: FC<CanvasProps> = ({ config }) => {
   const ref = useRef<StageRef>(null)
+  const theme = useMemo(() => (config.color.startsWith('black') ? 'dark' : 'light'), [config.color])
+
   const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 })
 
   const [userImage] = useImage(config.image, 'anonymous')
   const [backgroundImage] = useImage(`./${config.color}.png`, 'anonymous')
 
   const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
+  const [grade] = useImage(`./gc/${config.company}_${config.grade}.png`, 'anonymous')
   const [expansion] = useImage(`./expansions/${config.expansion}.png`, 'anonymous')
 
   const [like] = useImage('./ui/like.png', 'anonymous')
@@ -75,8 +79,8 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   })
 
   const fontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
-  const lineColor = useMemo(() => (config.color === 'black' ? '#3c3c3c' : '#b3b3b3'), [config.color])
-  const textColor = useMemo(() => (config.color === 'black' ? '#818181' : '#424242'), [config.color])
+  const lineColor = useMemo(() => (theme === 'dark' ? '#3c3c3c' : '#b3b3b3'), [theme])
+  const textColor = useMemo(() => (theme === 'dark' ? '#818181' : '#424242'), [theme])
 
   const image = (
     <>
@@ -127,6 +131,26 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         const step = (1844 - rightBoxStartX) / a.length
         return <Line key={i} points={[rightBoxStartX + step * i, 900 - invert * step, rightBoxStartX + step * (i + 1), 900 + invert * step]} stroke={lineColor} />
       })}
+    </>
+  )
+
+  const freeCompany = (
+    <>
+      {/* 총사령부 아이콘 */}
+      <Image image={grade} x={leftRectWidth + 57} y={30} width={80} height={80} />
+      <Text x={leftRectWidth + 145} y={58} text={`${config.company} ${config.grade}`} fontFamily={fontFamily} fontSize={24} fill={textColor} />
+    </>
+  )
+
+  const bozjaEureka = (
+    <>
+      {/* 에우레카 */}
+      <LevelIcon iconPath="eureka" level={config.eurekaLevel} theme={theme} x={leftRectWidth + 60} y={110} width={40} height={40} />
+      <Text text={config.eurekaLevel.toString()} x={leftRectWidth + 60 + 45} y={110 + 14} fill={config.eurekaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
+
+      {/* 보즈야 아이콘 */}
+      <LevelIcon iconPath="bozja" level={config.bozjaLevel} theme={theme} x={leftRectWidth + 150} y={110} width={40} height={40} />
+      <Text text={config.bozjaLevel.toString()} x={leftRectWidth + 150 + 45} y={110 + 14} fill={config.bozjaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
     </>
   )
 
@@ -263,7 +287,14 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const copyright = (
     <>
       <Text x={1540} y={1005} text="https://chalkpe.github.io/toot-friends/" fontFamily={fontFamily} fontSize={24} fill={textColor} />
-      <Text x={1500} y={1040} text="© SQUARE ENIX Co. LTD. All Right Reserved" fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text
+        x={1005}
+        y={1040}
+        text="©2010-2023 SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD."
+        fontFamily={fontFamily}
+        fontSize={24}
+        fill={textColor}
+      />
     </>
   )
 
@@ -297,6 +328,8 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {playstyle}
           {comment}
           {copyright}
+          {freeCompany}
+          {bozjaEureka}
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect
