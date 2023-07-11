@@ -27,9 +27,8 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const ref = useRef<StageRef>(null)
   const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 })
 
-  const [white] = useImage('./white.png', 'anonymous')
-  const [black] = useImage('./black.png', 'anonymous')
   const [userImage] = useImage(config.image, 'anonymous')
+  const [backgroundImage] = useImage(`./${config.color}.png`, 'anonymous')
 
   const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
   const [expansion] = useImage(`./expansions/${config.expansion}.png`, 'anonymous')
@@ -85,7 +84,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       <Image image={userImage} scale={{ x: config.scale, y: config.scale }} x={imageOffset.x - (sceneWidth / 2 - leftRectWidth / 2)} y={imageOffset.y} />
 
       {/* 배경 이미지 */}
-      <Image image={config.color === 'white' ? white : black} />
+      <Image image={backgroundImage} />
     </>
   )
 
@@ -239,24 +238,25 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       {/* 마스토돈 툿 성향 레이블 */}
       <Text x={rightSeparatorX + 22} y={575} text="툿 성향" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 툿 성향 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={615} text={config.orientations.length ? config.orientations.join(' | ') : '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={615} text={config.orientations.length ? config.orientations.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
 
       {/* 마스토돈 커플링 성향 레이블 */}
       <Text x={rightSeparatorX + 22} y={675} text="커플링 성향" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 커플링 성향 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={715} text={config.couplings.length ? config.couplings.join(' | ') : '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={715} text={config.couplings.length ? config.couplings.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
 
       {/* 마스토돈 기피 소재 레이블 */}
       <Text x={rightSeparatorX + 22} y={775} text="기피 소재" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 기피 소재 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={815} text={config.avoids.length ? config.avoids.join(' | ') : '-'} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={815} text={config.avoids.length ? config.avoids.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
     </>
   )
 
   const comment = (
     <>
-      <Text x={leftRectWidth + 30} y={950} text="한마디" fontFamily={fontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
-      <Text x={leftRectWidth + 170} y={940} width={1150} text={config.comment || '-'} fontFamily={fontFamily} fontSize={36} fill={textColor} />
+      {/* 한마디 */}
+      <Text x={leftRectWidth + 50} y={950} text="한마디" fontFamily={fontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
+      <Text x={leftRectWidth + 190} y={940} width={1150} text={config.comment || '-'} fontFamily={fontFamily} fontSize={36} fill={textColor} />
     </>
   )
 

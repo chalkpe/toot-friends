@@ -75,7 +75,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="한마디">
-          <Input.TextArea value={config.comment} onChange={(e) => setConfig({ ...config, comment: e.target.value })} placeholder="한마디" />
+          <Input.TextArea style={{ height: 80 }} value={config.comment} onChange={(e) => setConfig({ ...config, comment: e.target.value })} placeholder="한마디" />
         </Form.Item>
       </Space>
     ),
@@ -94,7 +94,9 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             defaultValue="black"
           >
             <Radio value="black">검은색</Radio>
+            <Radio value="black2">검은색 (상단 그림자 없음)</Radio>
             <Radio value="white">흰색</Radio>
+            <Radio value="white2">흰색 (상단 그림자 없음)</Radio>
           </Radio.Group>
         </Form.Item>
         <Form.Item label="폰트 설정">
@@ -114,7 +116,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
     ffxiv: (
       <Space direction="vertical">
         <Form.Item label="선호 직업">
-          <Space size="small" wrap>
+          <Space wrap size="small">
             {jobs.map((job, index) => {
               if (!job) return <Divider key={index} type="vertical" />
               const image = (
@@ -160,12 +162,12 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         <Form.Item label="플레이 시간대">
           <Checkbox.Group value={config.playtime.map((_, index) => index).filter((index) => config.playtime[index])} onChange={(group) => setConfig({ ...config, playtime: Array.from(Array(24)).map((_, index) => group.includes(index)) })}>
             <Space direction="vertical">
-              <Space>
+              <Space wrap>
                 {Array.from(Array(12)).map((_, index) => (
                   <Checkbox value={index}>{index.toString().padStart(2, '0')}시</Checkbox>
                 ))}
               </Space>
-              <Space>
+              <Space wrap>
                 {Array.from(Array(12)).map((_, index) => (
                   <Checkbox value={index + 12}>{index + 12}시</Checkbox>
                 ))}
@@ -204,13 +206,31 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           </Space>
         </Form.Item>
         <Form.Item label="툿 성향">
-          <Checkbox.Group options={orientations} value={config.orientations} onChange={(values) => setConfig({ ...config, orientations: values.map((x) => x.toString()) })} />
+          <Checkbox.Group value={config.orientations} onChange={(values) => setConfig({ ...config, orientations: values.map((x) => x.toString()) })}>
+            <Space wrap>
+              {orientations.map(({ label, value }) => (
+                <Checkbox value={value}>{label}</Checkbox>
+              ))}
+            </Space>
+          </Checkbox.Group>
         </Form.Item>
         <Form.Item label="커플링 성향">
-          <Checkbox.Group options={coupling} value={config.couplings} onChange={(values) => setConfig({ ...config, couplings: values.map((x) => x.toString()) })} />
+          <Checkbox.Group value={config.couplings} onChange={(values) => setConfig({ ...config, couplings: values.map((x) => x.toString()) })}>
+            <Space wrap>
+              {coupling.map(({ label, value }) => (
+                <Checkbox value={value}>{label}</Checkbox>
+              ))}
+            </Space>
+          </Checkbox.Group>
         </Form.Item>
         <Form.Item label="기피 소재">
-          <Checkbox.Group options={avoids} value={config.avoids} onChange={(values) => setConfig({ ...config, avoids: values.map((x) => x.toString()) })} />
+          <Checkbox.Group value={config.avoids} onChange={(values) => setConfig({ ...config, avoids: values.map((x) => x.toString()) })}>
+            <Space wrap>
+              {avoids.map(({ label, value }) => (
+                <Checkbox value={value}>{label}</Checkbox>
+              ))}
+            </Space>
+          </Checkbox.Group>
         </Form.Item>
       </Space>
     ),
