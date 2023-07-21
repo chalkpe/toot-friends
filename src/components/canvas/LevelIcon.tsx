@@ -4,8 +4,9 @@ import { Image } from 'react-konva'
 import useImage from 'use-image'
 
 const colors = {
-  disabled: [90, 90, 90],
-  enabled: [204, 204, 204],
+  disabled: [90, 90, 90] as const,
+  disabledLight: [110, 110, 110] as const,
+  enabled: [204, 204, 204] as const,
 }
 
 interface LevelIconProps extends Omit<ComponentProps<typeof Image>, 'image'> {
@@ -14,14 +15,11 @@ interface LevelIconProps extends Omit<ComponentProps<typeof Image>, 'image'> {
   theme: 'light' | 'dark'
 }
 
-const LevelIcon: FC<LevelIconProps> = ({ iconPath, level, ...props }) => {
+const LevelIcon: FC<LevelIconProps> = ({ iconPath, level, theme, ...props }) => {
   const ref = useRef<Konva.Image>(null)
   const [image] = useImage(`./ui/${iconPath}.png`, 'anonymous')
 
-  const color = useMemo(() => colors[level === 0 ? 'disabled' : 'enabled'], [level])
-
-  console.log(color)
-
+  const color = useMemo(() => colors[level === 0 ? (theme === 'dark' ? 'disabled' : 'disabledLight') : 'enabled'], [level, theme])
   useEffect(() => {
     if (ref.current) {
       ref.current.cache()
@@ -29,9 +27,7 @@ const LevelIcon: FC<LevelIconProps> = ({ iconPath, level, ...props }) => {
     }
   }, [color, image])
 
-  return (
-    <Image {...props} image={image} ref={ref} />
-  )
+  return <Image {...props} image={image} ref={ref} />
 }
 
 export default LevelIcon

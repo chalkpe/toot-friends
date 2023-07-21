@@ -12,8 +12,8 @@ export type Config = {
   expansion: string
   company: string
   grade: string
-  eurekaLevel: number
-  bozjaLevel: number
+  eurekaLevel: number | undefined
+  bozjaLevel: number | undefined
   like: string
   dislike: string
   mastodonName: string
@@ -42,8 +42,8 @@ export const defaultConfig: Config = {
   expansion: '',
   company: '',
   grade: '',
-  eurekaLevel: 0,
-  bozjaLevel: 0,
+  eurekaLevel: undefined,
+  bozjaLevel: undefined,
   like: '',
   dislike: '',
   mastodonName: '',

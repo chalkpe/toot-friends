@@ -1,7 +1,7 @@
 import { FC, useCallback, useMemo, useState, useEffect, useRef } from 'react'
 
 import { Button, Card, Space } from 'antd'
-import { DownloadOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { DownloadOutlined } from '@ant-design/icons'
 
 import { Arc, Image, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
@@ -12,6 +12,7 @@ import { Config, jobsByRole } from '../common'
 import JobIcon from './canvas/JobIcon'
 import PlaystyleIcon from './canvas/PlaystyleIcon'
 import LevelIcon from './canvas/LevelIcon'
+import Thanks from './Thanks'
 
 const sceneWidth = 1920
 const sceneHeight = 1080
@@ -81,6 +82,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const fontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
   const lineColor = useMemo(() => (theme === 'dark' ? '#3c3c3c' : '#b3b3b3'), [theme])
   const textColor = useMemo(() => (theme === 'dark' ? '#818181' : '#424242'), [theme])
+  const highlightTextColor = useMemo(() => (theme === 'dark' ? '#818181' : '#cccccc'), [theme])
 
   const image = (
     <>
@@ -138,19 +140,19 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     <>
       {/* 총사령부 아이콘 */}
       <Image image={grade} x={leftRectWidth + 57} y={30} width={80} height={80} />
-      <Text x={leftRectWidth + 145} y={58} text={`${config.company} ${config.grade}`} fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text x={leftRectWidth + 145} y={58} text={`${config.company} ${config.grade}`} fontFamily={fontFamily} fontSize={24} fill={highlightTextColor} />
     </>
   )
 
   const bozjaEureka = (
     <>
       {/* 에우레카 */}
-      <LevelIcon iconPath="eureka" level={config.eurekaLevel} theme={theme} x={leftRectWidth + 60} y={110} width={40} height={40} />
-      <Text text={config.eurekaLevel.toString()} x={leftRectWidth + 60 + 45} y={110 + 14} fill={config.eurekaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
+      <LevelIcon iconPath="eureka" level={config.eurekaLevel ?? 0} theme={theme} x={leftRectWidth + 60} y={110} width={40} height={40} />
+      <Text text={config.eurekaLevel?.toString() ?? '0'} x={leftRectWidth + 60 + 45} y={110 + 14} fill={config.eurekaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
 
       {/* 보즈야 아이콘 */}
-      <LevelIcon iconPath="bozja" level={config.bozjaLevel} theme={theme} x={leftRectWidth + 150} y={110} width={40} height={40} />
-      <Text text={config.bozjaLevel.toString()} x={leftRectWidth + 150 + 45} y={110 + 14} fill={config.bozjaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
+      <LevelIcon iconPath="bozja" level={config.bozjaLevel ?? 0} theme={theme} x={leftRectWidth + 150} y={110} width={40} height={40} />
+      <Text text={config.bozjaLevel?.toString() ?? '0'} x={leftRectWidth + 150 + 45} y={110 + 14} fill={config.bozjaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
     </>
   )
 
@@ -158,31 +160,33 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const jobIconSize = 60
   const jobPaddingSize = 50
 
+  const jobDisabled = useMemo(() => theme === 'dark' ? 'disabled' : 'disabledLight', [theme])
+
   const jobs = (
     <>
       {/* 탱커 */}
       {jobsByRole.tank.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'tank' : 'disabled'} />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'tank' : jobDisabled} />
       ))}
 
       {/* 힐러 */}
       {jobsByRole.healer.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'healer' : 'disabled'} />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'healer' : jobDisabled} />
       ))}
 
       {/* 딜러 */}
       {jobsByRole.dps.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (1 + jobsByRole.healer.length + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'dps' : 'disabled'} />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (1 + jobsByRole.healer.length + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'dps' : jobDisabled} />
       ))}
 
       {/* 제작자 */}
       {jobsByRole.crafter.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'crafter' : 'disabled'} />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'crafter' : jobDisabled} />
       ))}
 
       {/* 채집가 */}
       {jobsByRole.gatherer.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.crafter.length) + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'gatherer' : 'disabled'} />
+        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.crafter.length) + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'gatherer' : jobDisabled} />
       ))}
     </>
   )
@@ -304,7 +308,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       title={
         <Space>
           <span>툿친소 시트 메이커</span>
-          <InfoCircleOutlined />
+          <Thanks />
         </Space>
       }
       bodyStyle={{ padding: 0 }}

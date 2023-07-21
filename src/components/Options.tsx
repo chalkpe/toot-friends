@@ -152,7 +152,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             <Select style={{ width: 150 }} value={config.expansion} onChange={(expansion) => setConfig({ ...config, expansion })} placeholder="확장팩" options={expansions} />
           </Space>
         </Form.Item>
-        <Form.Item label="선호 설정">
+        <Form.Item label="좋아요 / 싫어요">
           <Space wrap>
             <Input style={{ width: 300 }} value={config.like} onChange={(e) => setConfig({ ...config, like: e.target.value })} placeholder="좋아요" />
             <Input style={{ width: 300 }} value={config.dislike} onChange={(e) => setConfig({ ...config, dislike: e.target.value })} placeholder="싫어요" />
@@ -168,8 +168,8 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
 
         <Form.Item label="특수 레벨">
           <Space wrap>
-            <InputNumber style={{ width: 150 }} value={config.eurekaLevel} onChange={(eurekaLevel) => setConfig({ ...config, eurekaLevel: eurekaLevel || 0 })} placeholder="에우레카 레벨" />
-            <InputNumber style={{ width: 150 }} value={config.bozjaLevel} onChange={(bozjaLevel) => setConfig({ ...config, bozjaLevel: bozjaLevel || 0 })} placeholder="보즈야 레벨" />
+            <InputNumber style={{ width: 150 }} value={config.eurekaLevel} onChange={(eurekaLevel) => setConfig({ ...config, eurekaLevel: eurekaLevel ?? undefined })} placeholder="에우레카" />
+            <InputNumber style={{ width: 150 }} value={config.bozjaLevel} onChange={(bozjaLevel) => setConfig({ ...config, bozjaLevel: bozjaLevel ?? undefined })} placeholder="보즈야" />
           </Space>
         </Form.Item>
 
