@@ -6,7 +6,6 @@ interface PlaystyleIconProps extends Omit<ComponentProps<typeof Image>, 'image'>
   iconPath: string
 }
 
-
 const PlaystyleIcon: FC<PlaystyleIconProps> = ({ iconPath, ...props }) => {
   const [image] = useImage(`./playstyles/${iconPath}.png`, 'anonymous')
   return (

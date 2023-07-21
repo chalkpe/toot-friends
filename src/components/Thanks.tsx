@@ -7,8 +7,7 @@ const Thanks = () => {
 
   const ofl = (
     <a target="_blank" rel="noreferrer" href="https://spdx.org/licenses/OFL-1.1.html">
-      <LinkOutlined />{' '}
-      SIL Open Font License 1.1
+      <LinkOutlined /> SIL Open Font License 1.1
     </a>
   )
 
