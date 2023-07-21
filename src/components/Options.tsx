@@ -1,9 +1,10 @@
-import { FC, useState } from 'react'
-import { AutoComplete, Avatar, Badge, Button, Card, Checkbox, Divider, Form, Image, Input, InputNumber, Radio, Select, Slider, Space, Upload } from 'antd'
+import { FC, useCallback, useState } from 'react'
+import { AutoComplete, Button, Card, Checkbox, Form, Image, Input, InputNumber, Radio, Select, Slider, Space, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, avoids, companies, coupling, expansions, grades, jobs, orientations, playstyles, progress, servers } from '../common'
+import { Config, avoids, companies, coupling, expansions, grades, orientations, playstyles, progress, servers } from '../common'
+import JobSelect from './options/JobSelect'
 
 interface OptionsProps {
   config: Config
@@ -12,6 +13,9 @@ interface OptionsProps {
 
 const Options: FC<OptionsProps> = ({ config, setConfig }) => {
   const [key, setKey] = useState('basic')
+
+  const setJob = useCallback((job: string) => setConfig({ ...config, job }), [config, setConfig])
+  const setJobs = useCallback((job: string) => setConfig({ ...config, jobs: config.jobs.includes(job) ? config.jobs.filter((j) => j !== job) : [...config.jobs, job] }), [config, setConfig])
 
   const components = {
     basic: (
@@ -41,20 +45,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
         </Form.Item>
 
         <Form.Item label="대표 직업">
-          <Space size="small" wrap>
-            {jobs.map((job, index) => {
-              if (!job) return <Divider key={index} type="vertical" />
-              const image = <Avatar key={job} size="small" shape="square" alt={job} src={`./icons/${job}.png`} onClick={() => setConfig({ ...config, job })} />
-
-              return job === config.job ? (
-                <Badge dot key={job}>
-                  {image}
-                </Badge>
-              ) : (
-                image
-              )
-            })}
-          </Space>
+          <JobSelect selectedJobs={config.job} onSelect={setJob} />
         </Form.Item>
 
         <Form.Item label="캐릭터 정보">
@@ -116,34 +107,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
     ffxiv: (
       <Space direction="vertical">
         <Form.Item label="선호 직업">
-          <Space wrap size="small">
-            {jobs.map((job, index) => {
-              if (!job) return <Divider key={index} type="vertical" />
-              const image = (
-                <Avatar
-                  key={job}
-                  size="small"
-                  shape="square"
-                  alt={job}
-                  src={`./icons/${job}.png`}
-                  onClick={() =>
-                    setConfig({
-                      ...config,
-                      jobs: config.jobs.includes(job) ? config.jobs.filter((j) => j !== job) : [...config.jobs, job],
-                    })
-                  }
-                />
-              )
-
-              return config.jobs.includes(job) ? (
-                <Badge dot key={job}>
-                  {image}
-                </Badge>
-              ) : (
-                image
-              )
-            })}
-          </Space>
+          <JobSelect selectedJobs={config.jobs} onSelect={setJobs} />
         </Form.Item>
 
         <Form.Item label="메인 퀘스트 진도">
