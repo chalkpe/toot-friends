@@ -86,6 +86,7 @@ export const progress = [
   { label: 'v6.2 금단의 기억', value: 'v6.2 완료' },
   { label: 'v6.3 하늘의 축제, 땅의 전율', value: 'v6.3 완료' },
   { label: 'v6.4 옥좌의 죄인', value: 'v6.4 완료' },
+  { label: 'v6.5 광명의 기점', value: 'v6.5 완료' },
 ]
 
 export const expansions = [

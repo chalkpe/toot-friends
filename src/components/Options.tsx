@@ -20,7 +20,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
   const components = {
     basic: (
       <Space direction="vertical">
-        <Form.Item label="카드 이미지">
+        <Form.Item label="카드 이미지 (1920*1080px 권장)">
           <Upload
             accept="image/*"
             listType="picture"
