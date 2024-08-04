@@ -87,6 +87,7 @@ export const progress = [
   { label: 'v6.3 하늘의 축제, 땅의 전율', value: 'v6.3 완료' },
   { label: 'v6.4 옥좌의 죄인', value: 'v6.4 완료' },
   { label: 'v6.5 광명의 기점', value: 'v6.5 완료' },
+  { label: 'v7.0 황금의 유산', value: 'v7.0 완료' },
 ]
 
 export const expansions = [
@@ -95,6 +96,7 @@ export const expansions = [
   { label: '홍련의 해방자', value: 'stormblood' },
   { label: '칠흑의 반역자', value: 'shadowbringers' },
   { label: '효월의 종언', value: 'endwalker' },
+  { label: '황금의 유산', value: 'dawntrail' },
 ]
 
 export const jobs = [
@@ -113,6 +115,7 @@ export const jobs = [
   'ninja',
   'samurai',
   'reaper',
+  'viper',
   null,
   'bard',
   'machinist',
@@ -121,6 +124,7 @@ export const jobs = [
   'blackmage',
   'summoner',
   'redmage',
+  'pictomancer',
   'bluemage',
   null,
   'carpenter',
@@ -140,7 +144,7 @@ export const jobs = [
 export const jobsByRole = {
   tank: ['paladin', 'warrior', 'darkknight', 'gunbreaker'],
   healer: ['whitemage', 'scholar', 'astrologian', 'sage'],
-  dps: ['monk', 'dragoon', 'ninja', 'samurai', 'reaper', 'bard', 'machinist', 'dancer', 'blackmage', 'summoner', 'redmage', 'bluemage'],
+  dps: ['monk', 'dragoon', 'ninja', 'samurai', 'reaper', 'viper', 'bard', 'machinist', 'dancer', 'blackmage', 'summoner', 'redmage', 'pictomancer', 'bluemage'],
   crafter: ['carpenter', 'blacksmith', 'armorer', 'goldsmith', 'leatherworker', 'weaver', 'alchemist', 'culinarian'],
   gatherer: ['miner', 'botanist', 'fisher'],
 }
