@@ -1,6 +1,7 @@
 export type Config = {
   color: 'black' | 'white' | 'black2' | 'white2'
   font: string
+  titleFont: string
   name: string
   server: string
   title: string
@@ -30,7 +31,8 @@ export type Config = {
 
 export const defaultConfig: Config = {
   color: 'black',
-  font: '나눔바른펜',
+  font: '나눔바른펜OTF',
+  titleFont: 'KoPub Dotum',
   name: '',
   server: '',
   title: '',

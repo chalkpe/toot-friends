@@ -94,8 +94,17 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Select
             value={config.font}
             onChange={(font) => setConfig({ ...config, font })}
-            placeholder="폰트 이름을 입력하세요."
-            options={['나눔바른펜', 'Noto Sans KR'].map((font) => ({
+            options={['나눔바른펜OTF', 'Noto Sans KR', 'Pretendard'].map((font) => ({
+              value: font,
+              label: <span style={{ fontFamily: font }}>{font}</span>,
+            }))}
+          />
+        </Form.Item>
+        <Form.Item label="타이틀 폰트 설정">
+          <Select
+            value={config.titleFont}
+            onChange={(titleFont) => setConfig({ ...config, titleFont })}
+            options={['나눔바른펜OTF', 'KoPub Dotum', 'Noto Sans KR', 'Pretendard'].map((font) => ({
               value: font,
               label: <span style={{ fontFamily: font }}>{font}</span>,
             }))}

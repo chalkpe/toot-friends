@@ -27,7 +27,8 @@ const Thanks = () => {
 
           <h4>Font license</h4>
           <ul>
-            <li>나눔바른펜 - {ofl}</li>
+            <li>Pretendard - {ofl}</li>
+            <li>나눔바른펜OTF - {ofl}</li>
             <li>Noto Sans KR - {ofl}</li>
             <li>
               KoPub Dotum -{' '}

@@ -80,6 +80,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   })
 
   const fontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
+  const titleFontFamily = useMemo(() => config.titleFont || 'KoPub Dotum', [config.titleFont])
   const lineColor = useMemo(() => (theme === 'dark' ? '#3c3c3c' : '#b3b3b3'), [theme])
   const textColor = useMemo(() => (theme === 'dark' ? '#818181' : '#424242'), [theme])
   const highlightTextColor = useMemo(() => (theme === 'dark' ? '#818181' : '#cccccc'), [theme])
@@ -193,7 +194,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const progress = (
     <>
       {/* 메인 퀘스트 진행도 레이블 */}
-      <Text x={600} y={220} text="메인 퀘스트" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} />
+      <Text x={600} y={220} text="메인 퀘스트" fontFamily={titleFontFamily} fontSize={30} fill={textColor} />
 
       {/* 메인 퀘스트 진행도 이미지 */}
       {expansion && <Image image={expansion} x={1310 - (105 * expansion.width) / expansion.height} y={215} height={105} width={(105 * expansion.width) / expansion.height} />}
@@ -249,12 +250,12 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       <Text x={rightSeparatorX + 22} y={280} text={config.handle} fontFamily={fontFamily} fontSize={36} fill={textColor} />
 
       {/* 마스토돈 주 장르 레이블 */}
-      <Text x={rightSeparatorX + 22} y={350} text="MAIN" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      <Text x={rightSeparatorX + 22} y={350} text="MAIN" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 주 장르 텍스트 */}
       <Text x={rightSeparatorX + 22} y={390} text={config.mastodonMain} fontFamily={fontFamily} fontSize={30} fill={textColor} />
 
       {/* 마스토돈 서브 장르 레이블 */}
-      <Text x={rightSeparatorX + 22} y={440} text="ETC" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      <Text x={rightSeparatorX + 22} y={440} text="ETC" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 서브 장르 텍스트 */}
       <Text x={rightSeparatorX + 22} y={480} text={config.mastodonSub} fontFamily={fontFamily} fontSize={30} fill={textColor} />
     </>
@@ -263,17 +264,17 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const orientations = (
     <>
       {/* 마스토돈 툿 성향 레이블 */}
-      <Text x={rightSeparatorX + 22} y={575} text="툿 성향" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      <Text x={rightSeparatorX + 22} y={575} text="툿 성향" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 툿 성향 텍스트 */}
       <Text x={rightSeparatorX + 22} y={615} text={config.orientations.length ? config.orientations.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
 
       {/* 마스토돈 커플링 성향 레이블 */}
-      <Text x={rightSeparatorX + 22} y={675} text="커플링 성향" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      <Text x={rightSeparatorX + 22} y={675} text="커플링 성향" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 커플링 성향 텍스트 */}
       <Text x={rightSeparatorX + 22} y={715} text={config.couplings.length ? config.couplings.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
 
       {/* 마스토돈 기피 소재 레이블 */}
-      <Text x={rightSeparatorX + 22} y={775} text="기피 소재" fontFamily={'KoPub Dotum'} fontSize={30} fill={textColor} fontStyle="bold" />
+      <Text x={rightSeparatorX + 22} y={775} text="기피 소재" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 기피 소재 텍스트 */}
       <Text x={rightSeparatorX + 22} y={815} text={config.avoids.length ? config.avoids.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
     </>
