@@ -123,6 +123,9 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Space wrap>
             <Select style={{ width: 225 }} value={config.progress} onChange={(progress) => setConfig({ ...config, progress })} placeholder="예시) v6.3 완료" options={progress} />
             <Select style={{ width: 150 }} value={config.expansion} onChange={(expansion) => setConfig({ ...config, expansion })} placeholder="확장팩" options={expansions} />
+            <Checkbox checked={config.expansionOngoing} onChange={(e) => setConfig({ ...config, expansionOngoing: e.target.checked })}>
+              진행 중
+            </Checkbox>
           </Space>
         </Form.Item>
         <Form.Item label="좋아요 / 싫어요">

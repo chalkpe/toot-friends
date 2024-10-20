@@ -11,6 +11,7 @@ export type Config = {
   jobs: string[]
   progress: string
   expansion: string
+  expansionOngoing: boolean
   company: string
   grade: string
   eurekaLevel: number | undefined
@@ -42,6 +43,7 @@ export const defaultConfig: Config = {
   jobs: [],
   progress: '',
   expansion: '',
+  expansionOngoing: false,
   company: '',
   grade: '',
   eurekaLevel: undefined,
