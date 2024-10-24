@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/toot-friends/static/css/main.6258cbb1.css",
-    "main.js": "/toot-friends/static/js/main.2f07432d.js",
+    "main.js": "/toot-friends/static/js/main.39d75cb8.js",
     "index.html": "/toot-friends/index.html",
     "main.6258cbb1.css.map": "/toot-friends/static/css/main.6258cbb1.css.map",
-    "main.2f07432d.js.map": "/toot-friends/static/js/main.2f07432d.js.map"
+    "main.39d75cb8.js.map": "/toot-friends/static/js/main.39d75cb8.js.map"
   },
   "entrypoints": [
     "static/css/main.6258cbb1.css",
-    "static/js/main.2f07432d.js"
+    "static/js/main.39d75cb8.js"
   ]
 }
