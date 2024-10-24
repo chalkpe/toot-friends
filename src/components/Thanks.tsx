@@ -44,7 +44,7 @@ const Thanks = () => {
           </ul>
           <h4>Designer</h4>
           <ul>
-            <li>Dro (@Drodraw@twingyeo.kr)</li>
+            <li>Dro (@Drodraw@chalk.moe)</li>
           </ul>
 
           <h4>Thanks to...</h4>
