@@ -315,7 +315,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const copyright = (
     <>
       <Text width={1895} align="right" x={0} y={1005} text="https://chalkpe.github.io/toot-friends/" fontFamily={fontFamily} fontSize={24} fill={textColor} />
-      <Text width={1895} align="right" x={0} y={1040} text="©2010-2023 SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD." fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text width={1895} align="right" x={0} y={1040} text={`©2010-${new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.`} fontFamily={fontFamily} fontSize={24} fill={textColor} />
     </>
   )
 
