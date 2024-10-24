@@ -148,8 +148,7 @@ export const jobs = [
 export const jobsByRole = {
   tank: ['paladin', 'warrior', 'darkknight', 'gunbreaker'],
   healer: ['whitemage', 'scholar', 'astrologian', 'sage'],
-  dps: ['monk', 'dragoon', 'ninja', 'samurai', 'reaper', 'bard', 'machinist', 'dancer', 'blackmage', 'summoner', 'redmage', 'bluemage'],
-  // dps: ['monk', 'dragoon', 'ninja', 'samurai', 'reaper', 'viper', 'bard', 'machinist', 'dancer', 'blackmage', 'summoner', 'redmage', 'pictomancer', 'bluemage'],
+  dps: ['monk', 'dragoon', 'ninja', 'samurai', 'reaper', 'viper', 'bard', 'machinist', 'dancer', 'blackmage', 'summoner', 'redmage', 'pictomancer', 'bluemage'],
   crafter: ['carpenter', 'blacksmith', 'armorer', 'goldsmith', 'leatherworker', 'weaver', 'alchemist', 'culinarian'],
   gatherer: ['miner', 'botanist', 'fisher'],
 }

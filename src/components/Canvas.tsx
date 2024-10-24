@@ -157,36 +157,60 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     </>
   )
 
-  const jobStartX = rightBoxStartX + 240
+  const jobStartX = rightBoxStartX + 275
+  const jobStartY = 35
   const jobIconSize = 60
-  const jobPaddingSize = 50
+  const jobPaddingSize = 53
+
+  const jobDividerStrokeWidth = 4
+  const jobDividerPadding = jobIconSize / 4.5
+  const jobDividerStartX = jobStartX + jobDividerStrokeWidth / 2 + jobIconSize / 2
+  const jobDividerColor = useMemo(() => (theme === 'dark' ? '#777777' : '#6e6e6e'), [theme])
+
   const jobDisabled = useMemo(() => (theme === 'dark' ? 'disabled' : 'disabledLight'), [theme])
 
   const jobs = (
     <>
       {/* 탱커 */}
       {jobsByRole.tank.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'tank' : jobDisabled} />
+        <JobIcon key={job} width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={jobStartY} iconPath={job} colorType={config.jobs.includes(job) ? 'tank' : jobDisabled} />
       ))}
+
+      {/* 탱커 | 힐러 */}
+      <Line stroke={jobDividerColor} strokeWidth={jobDividerStrokeWidth} points={[jobDividerStartX + jobPaddingSize * jobsByRole.tank.length, jobStartY + jobDividerPadding, jobDividerStartX + jobPaddingSize * jobsByRole.tank.length, jobStartY + jobIconSize - jobDividerPadding]} />
 
       {/* 힐러 */}
       {jobsByRole.healer.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'healer' : jobDisabled} />
+        <JobIcon key={job} width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize + jobPaddingSize * (1 + jobsByRole.tank.length)} y={jobStartY} iconPath={job} colorType={config.jobs.includes(job) ? 'healer' : jobDisabled} />
+      ))}
+
+      {/* 힐러 | 제작자 */}
+      <Line
+        stroke={jobDividerColor}
+        strokeWidth={jobDividerStrokeWidth}
+        points={[jobDividerStartX + jobPaddingSize * (1 + jobsByRole.tank.length + jobsByRole.healer.length), jobStartY + jobDividerPadding, jobDividerStartX + jobPaddingSize * (1 + jobsByRole.tank.length + jobsByRole.healer.length), jobStartY + jobIconSize - jobDividerPadding]}
+      />
+
+      {/* 제작자 */}
+      {jobsByRole.crafter.map((job, index) => (
+        <JobIcon key={job} width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize + jobPaddingSize * (1 + jobsByRole.tank.length) + jobPaddingSize * (1 + jobsByRole.healer.length)} y={jobStartY} iconPath={job} colorType={config.jobs.includes(job) ? 'crafter' : jobDisabled} />
       ))}
 
       {/* 딜러 */}
       {jobsByRole.dps.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (1 + jobsByRole.healer.length + jobsByRole.tank.length) + index * jobPaddingSize} y={40} iconPath={job} colorType={config.jobs.includes(job) ? 'dps' : jobDisabled} />
+        <JobIcon key={job} width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={jobStartY + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'dps' : jobDisabled} />
       ))}
 
-      {/* 제작자 */}
-      {jobsByRole.crafter.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'crafter' : jobDisabled} />
-      ))}
+      {/* 딜러 | 채집가 */}
+      <Line
+        stroke={jobDividerColor}
+        strokeWidth={jobDividerStrokeWidth}
+        points={[jobDividerStartX + jobPaddingSize * jobsByRole.dps.length, jobStartY + jobIconSize + jobDividerPadding, jobDividerStartX + jobPaddingSize * jobsByRole.dps.length, jobStartY + jobIconSize + jobIconSize - jobDividerPadding]}
+      />
 
       {/* 채집가 */}
       {jobsByRole.gatherer.map((job, index) => (
-        <JobIcon width={jobIconSize} height={jobIconSize} x={jobStartX + jobPaddingSize * (0.5 + jobsByRole.crafter.length) + index * jobPaddingSize} y={40 + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'gatherer' : jobDisabled} />
+        <JobIcon key={job} width={jobIconSize} height={jobIconSize} x={jobStartX + index * jobPaddingSize + jobPaddingSize * (1 + jobsByRole.dps.length)} y={jobStartY + jobIconSize} iconPath={job} colorType={config.jobs.includes(job) ? 'gatherer' : jobDisabled} />
       ))}
     </>
   )
@@ -208,7 +232,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     <>
       {/* 플레이 시간 파이 차트 */}
       {config.playtime.map((play, index) => (
-        <Arc angle={360 / config.playtime.length + 0.5} rotationDeg={-90 + 360 * (index / config.playtime.length)} innerRadius={60} outerRadius={90} x={700} y={460} fill={play ? (index < 12 ? '#45c4f1' : '#f1a251') : '#d2d2d2'} />
+        <Arc key={index} angle={360 / config.playtime.length + 0.5} rotation={-90 + 360 * (index / config.playtime.length)} innerRadius={60} outerRadius={90} x={700} y={460} fill={play ? (index < 12 ? '#45c4f1' : '#f1a251') : '#d2d2d2'} />
       ))}
 
       <Text text="0" x={625} y={450 - 40} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
@@ -221,10 +245,10 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const playstyle = (
     <>
       {Array.from(Array(5)).map((_, i) => (
-        <PlaystyleIcon x={835 + 95 * i} y={370} iconPath={config.playstyles[i]} />
+        <PlaystyleIcon key={i} x={835 + 95 * i} y={370} iconPath={config.playstyles[i]} />
       ))}
       {Array.from(Array(5)).map((_, i) => (
-        <PlaystyleIcon x={835 + 95 * i} y={465} iconPath={config.playstyles[i + 5]} />
+        <PlaystyleIcon key={i + 5} x={835 + 95 * i} y={465} iconPath={config.playstyles[i + 5]} />
       ))}
     </>
   )

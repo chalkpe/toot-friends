@@ -25,9 +25,11 @@ const JobIcon: FC<JobIconProps> = ({ iconPath, colorType, rgb, ...props }) => {
   useEffect(() => {
     if (ref.current) {
       ref.current.cache()
+      ref.current.width(props.width)
+      ref.current.height(props.height)
       ref.current.filters([Konva.Filters.RGBA]).red(colors[colorType][0]).green(colors[colorType][1]).blue(colors[colorType][2])
     }
-  }, [icon, colorType])
+  }, [icon, colorType, props.width, props.height])
 
   return <Image {...props} image={icon} ref={ref} />
 }

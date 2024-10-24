@@ -154,12 +154,16 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             <Space direction="vertical">
               <Space wrap>
                 {Array.from(Array(12)).map((_, index) => (
-                  <Checkbox value={index}>{index.toString().padStart(2, '0')}시</Checkbox>
+                  <Checkbox key={index} value={index}>
+                    {index.toString().padStart(2, '0')}시
+                  </Checkbox>
                 ))}
               </Space>
               <Space wrap>
                 {Array.from(Array(12)).map((_, index) => (
-                  <Checkbox value={index + 12}>{index + 12}시</Checkbox>
+                  <Checkbox key={index + 12} value={index + 12}>
+                    {index + 12}시
+                  </Checkbox>
                 ))}
               </Space>
             </Space>
@@ -170,7 +174,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Checkbox.Group value={config.playstyles} onChange={(values) => setConfig({ ...config, playstyles: values.map((v) => v.toString()).slice(0, 10) })}>
             <Space wrap>
               {Object.entries(playstyles).map(([playstyle, displayName]) => (
-                <Checkbox value={playstyle}>
+                <Checkbox key={playstyle} value={playstyle}>
                   <Image src={`playstyles/${playstyle}.png`} preview={false} width={32} />
                   &nbsp;{displayName}
                 </Checkbox>
@@ -199,7 +203,9 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Checkbox.Group value={config.orientations} onChange={(values) => setConfig({ ...config, orientations: values.map((x) => x.toString()) })}>
             <Space wrap>
               {orientations.map(({ label, value }) => (
-                <Checkbox value={value}>{label}</Checkbox>
+                <Checkbox key={value} value={value}>
+                  {label}
+                </Checkbox>
               ))}
             </Space>
           </Checkbox.Group>
@@ -208,7 +214,9 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Checkbox.Group value={config.couplings} onChange={(values) => setConfig({ ...config, couplings: values.map((x) => x.toString()) })}>
             <Space wrap>
               {coupling.map(({ label, value }) => (
-                <Checkbox value={value}>{label}</Checkbox>
+                <Checkbox key={value} value={value}>
+                  {label}
+                </Checkbox>
               ))}
             </Space>
           </Checkbox.Group>
@@ -217,7 +225,9 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Checkbox.Group value={config.avoids} onChange={(values) => setConfig({ ...config, avoids: values.map((x) => x.toString()) })}>
             <Space wrap>
               {avoids.map(({ label, value }) => (
-                <Checkbox value={value}>{label}</Checkbox>
+                <Checkbox key={value} value={value}>
+                  {label}
+                </Checkbox>
               ))}
             </Space>
           </Checkbox.Group>
