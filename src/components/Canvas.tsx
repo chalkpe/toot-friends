@@ -36,7 +36,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
   const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
   const [grade] = useImage(`./gc/${config.company}_${config.grade}.png`, 'anonymous')
-  const [expansion] = useImage(`./expansions/${config.expansion}.png`, 'anonymous')
+  const [expansion] = useImage(`./expansions/${config.expansion}_ko.png`, 'anonymous')
 
   const [like] = useImage('./ui/like.png', 'anonymous')
   const [dislike] = useImage('./ui/dislike.png', 'anonymous')
