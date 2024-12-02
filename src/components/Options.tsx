@@ -3,7 +3,7 @@ import { AutoComplete, Button, Card, Checkbox, Form, Image, Input, InputNumber, 
 import { RcFile } from 'antd/es/upload'
 import { UploadOutlined } from '@ant-design/icons'
 
-import { Config, avoids, companies, coupling, expansions, grades, orientations, playstyles, progress, servers } from '../common'
+import { Config, avoids, companies, coupling, expansions, grades, orientations, playstyles, servers } from '../common'
 import JobSelect from './options/JobSelect'
 
 interface OptionsProps {
@@ -121,8 +121,26 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
 
         <Form.Item label="메인 퀘스트 진도">
           <Space wrap>
-            <Select style={{ width: 225 }} value={config.progress} onChange={(progress) => setConfig({ ...config, progress })} placeholder="예시) v6.3 완료" options={progress} />
-            <Select style={{ width: 150 }} value={config.expansion} onChange={(expansion) => setConfig({ ...config, expansion })} placeholder="확장팩" options={expansions} />
+            <Select
+              style={{ width: 225 }}
+              value={config.progress}
+              onChange={(p) => {
+                const expansion = expansions.find((expansion) => expansion.options.some((sub) => sub.value === p))
+                expansion ? setConfig({ ...config, progress: p, expansion: expansion.value }) : setConfig({ ...config, progress: p })
+              }}
+              placeholder="예시) v6.3 완료"
+              options={expansions}
+            />
+            <Select
+              style={{ width: 150 }}
+              value={config.expansion}
+              onChange={(e) => {
+                const expansion = expansions.find((expansion) => expansion.value === e)
+                expansion ? setConfig({ ...config, expansion: e, progress: expansion.options[0].value }) : setConfig({ ...config, expansion: e })
+              }}
+              placeholder="확장팩"
+              options={expansions.map(({ label, value }) => ({ label, value }))}
+            />
             <Checkbox checked={config.expansionOngoing} onChange={(e) => setConfig({ ...config, expansionOngoing: e.target.checked })}>
               진행 중
             </Checkbox>
@@ -144,8 +162,8 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
 
         <Form.Item label="특수 레벨">
           <Space wrap>
-            <InputNumber style={{ width: 150 }} value={config.eurekaLevel} onChange={(eurekaLevel) => setConfig({ ...config, eurekaLevel: eurekaLevel ?? undefined })} placeholder="에우레카" />
-            <InputNumber style={{ width: 150 }} value={config.bozjaLevel} onChange={(bozjaLevel) => setConfig({ ...config, bozjaLevel: bozjaLevel ?? undefined })} placeholder="보즈야" />
+            <InputNumber style={{ width: 150 }} value={config.eurekaLevel} onChange={(eurekaLevel) => setConfig({ ...config, eurekaLevel: eurekaLevel ?? undefined })} placeholder="에우레카 (최대 60)" min={0} max={60} />
+            <InputNumber style={{ width: 150 }} value={config.bozjaLevel} onChange={(bozjaLevel) => setConfig({ ...config, bozjaLevel: bozjaLevel ?? undefined })} placeholder="보즈야 (최대 25)" min={0} max={25} />
           </Space>
         </Form.Item>
 

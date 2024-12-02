@@ -224,7 +224,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       {expansion && <Image image={expansion} x={1310 - (105 * expansion.width) / expansion.height} y={215} height={105} width={(105 * expansion.width) / expansion.height} />}
 
       {/* 메인 퀘스트 진행도 */}
-      <Text x={600} y={265} text={config.expansionOngoing ? config.progress.replaceAll('완료', '진행 중') : config.progress} fontFamily={fontFamily} fontSize={48} fill={textColor} />
+      <Text x={600} y={265} text={`${config.progress} ${config.expansionOngoing ? '진행 중' : '완료'}`} fontFamily={fontFamily} fontSize={48} fill={textColor} />
     </>
   )
 
