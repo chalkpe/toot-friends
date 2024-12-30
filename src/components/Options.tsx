@@ -14,7 +14,7 @@ interface OptionsProps {
 const Options: FC<OptionsProps> = ({ config, setConfig }) => {
   const [key, setKey] = useState('basic')
 
-  const setJob = useCallback((job: string) => setConfig({ ...config, job }), [config, setConfig])
+  const setJob = useCallback((job: string) => setConfig({ ...config, job: config.job === job ? undefined : job }), [config, setConfig])
   const setJobs = useCallback((job: string) => setConfig({ ...config, jobs: config.jobs.includes(job) ? config.jobs.filter((j) => j !== job) : [...config.jobs, job] }), [config, setConfig])
 
   const components = {

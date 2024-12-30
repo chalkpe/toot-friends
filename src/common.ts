@@ -7,7 +7,7 @@ export type Config = {
   title: string
   image: any
   scale: number
-  job: string
+  job: string | undefined
   jobs: string[]
   progress: string
   expansion: string

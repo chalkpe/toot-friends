@@ -1,6 +1,6 @@
 import './App.css'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Layout } from 'antd'
 
 import Canvas from './components/Canvas'
@@ -9,8 +9,14 @@ import Options from './components/Options'
 import { Config, defaultConfig } from './common'
 
 function App() {
-  const [config, setConfig] = useState<Config>(defaultConfig)
+  const conf = localStorage.getItem('config')
+  const [config, setConfig] = useState<Config>(conf ? JSON.parse(conf) : defaultConfig)
 
+  useEffect(() => {
+    const { image, ...rest } = config
+    localStorage.setItem('config', JSON.stringify(rest))
+  }, [config])
+  
   return (
     <Layout>
       <Layout.Content>

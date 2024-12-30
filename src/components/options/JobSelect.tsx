@@ -3,7 +3,7 @@ import { FC, memo } from 'react'
 import { jobs } from '../../common'
 
 interface JobSelectProps {
-  selectedJobs: string | string[]
+  selectedJobs: string | string[] | undefined
   onSelect: (job: string) => void
 }
 
