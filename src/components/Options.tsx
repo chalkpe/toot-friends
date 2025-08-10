@@ -94,7 +94,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Select
             value={config.font}
             onChange={(font) => setConfig({ ...config, font })}
-            options={['나눔바른펜OTF', 'Noto Sans KR', 'Pretendard'].map((font) => ({
+            options={['나눔바른펜OTF', 'Noto Sans KR', 'Pretendard', 'IBM Plex Sans KR'].map((font) => ({
               value: font,
               label: <span style={{ fontFamily: font }}>{font}</span>,
             }))}
@@ -104,7 +104,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Select
             value={config.titleFont}
             onChange={(titleFont) => setConfig({ ...config, titleFont })}
-            options={['나눔바른펜OTF', 'KoPub Dotum', 'Noto Sans KR', 'Pretendard'].map((font) => ({
+            options={['나눔바른펜OTF', 'KoPub Dotum', 'Noto Sans KR', 'Pretendard', 'IBM Plex Sans KR'].map((font) => ({
               value: font,
               label: <span style={{ fontFamily: font }}>{font}</span>,
             }))}
