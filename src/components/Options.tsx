@@ -126,7 +126,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
               value={config.progress}
               onChange={(p) => {
                 const expansion = expansions.find((expansion) => expansion.options.some((sub) => sub.value === p))
-                expansion ? setConfig({ ...config, progress: p, expansion: expansion.value }) : setConfig({ ...config, progress: p })
+                setConfig(expansion ? { ...config, progress: p, expansion: expansion.value } : { ...config, progress: p })
               }}
               placeholder="예시) v6.3 완료"
               options={expansions}
@@ -136,7 +136,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
               value={config.expansion}
               onChange={(e) => {
                 const expansion = expansions.find((expansion) => expansion.value === e)
-                expansion ? setConfig({ ...config, expansion: e, progress: expansion.options[0].value }) : setConfig({ ...config, expansion: e })
+                setConfig(expansion ? { ...config, expansion: e, progress: expansion.options[0].value } : { ...config, expansion: e })
               }}
               placeholder="확장팩"
               options={expansions.map(({ label, value }) => ({ label, value }))}
