@@ -128,7 +128,7 @@ export const expansions = [
       { label: 'v7.0 황금의 유산', value: 'v7.0' },
       { label: 'v7.1 미지와의 해후', value: 'v7.1' },
       { label: 'v7.2 영원의 탐구자', value: 'v7.2' },
-      { label: 'v7.3 내일로의 이정표', value: 'v7.3' },
+      { label: 'v7.3 내일을 향한 이정표', value: 'v7.3' },
     ],
   },
 ]
