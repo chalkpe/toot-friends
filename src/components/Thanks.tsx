@@ -29,6 +29,7 @@ const Thanks = () => {
           <ul>
             <li>Pretendard - {ofl}</li>
             <li>나눔바른펜OTF - {ofl}</li>
+            <li>LINE Seed Sans KR - {ofl}</li>
             <li>Noto Sans KR - {ofl}</li>
             <li>
               KoPub Dotum -{' '}
