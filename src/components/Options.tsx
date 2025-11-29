@@ -146,10 +146,10 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             </Checkbox>
           </Space>
         </Form.Item>
-        <Form.Item label="좋아요 / 싫어요">
+        <Form.Item label="좋아요 / 싫어요" tooltip="줄바꿈을 넣으면 글자 크기가 작아집니다.">
           <Space wrap>
-            <Input style={{ width: 300 }} value={config.like} onChange={(e) => setConfig({ ...config, like: e.target.value })} placeholder="좋아요" />
-            <Input style={{ width: 300 }} value={config.dislike} onChange={(e) => setConfig({ ...config, dislike: e.target.value })} placeholder="싫어요" />
+            <Input.TextArea rows={2} value={config.like} onChange={(e) => setConfig({ ...config, like: e.target.value })} placeholder="좋아요" style={{ width: 250 }} />
+            <Input.TextArea rows={2} value={config.dislike} onChange={(e) => setConfig({ ...config, dislike: e.target.value })} placeholder="싫어요" style={{ width: 250 }} />
           </Space>
         </Form.Item>
 

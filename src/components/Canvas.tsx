@@ -271,15 +271,18 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     </>
   )
 
+  const isLikeMultiLine = config.like.split('\n').length >= 2
+  const isDislikeMultiLine = config.dislike.split('\n').length >= 2
+
   const likes = (
     <>
       {/* 좋아요 */}
       <Image image={like} x={620} y={620} height={70} width={70} />
-      <Text x={620 + 100} y={620 + 12} text={config.like} fontFamily={bodyFontFamily} fontSize={42} fill={textColor} />
+      <Text x={620 + 100} y={620 + (isLikeMultiLine ? 0 : 15)} text={config.like} fontFamily={bodyFontFamily} fontSize={isLikeMultiLine ? 36 : 42} fill={textColor} lineHeight={1.2} />
 
       {/* 싫어요 */}
       <Image image={dislike} x={620} y={770} height={70} width={70} />
-      <Text x={620 + 100} y={770 + 12} text={config.dislike} fontFamily={bodyFontFamily} fontSize={42} fill={textColor} />
+      <Text x={620 + 100} y={770 + (isDislikeMultiLine ? 0 : 15)} text={config.dislike} fontFamily={bodyFontFamily} fontSize={isDislikeMultiLine ? 36 : 42} fill={textColor} lineHeight={1.2} />
     </>
   )
 
