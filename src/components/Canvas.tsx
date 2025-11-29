@@ -80,7 +80,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     return () => void window.removeEventListener('resize', resizeToContainer)
   })
 
-  const fontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
+  const bodyFontFamily = useMemo(() => config.font || 'Noto Sans KR', [config.font])
   const titleFontFamily = useMemo(() => config.titleFont || 'KoPub Dotum', [config.titleFont])
   const lineColor = useMemo(() => (theme === 'dark' ? '#3c3c3c' : '#b3b3b3'), [theme])
   const textColor = useMemo(() => (theme === 'dark' ? '#818181' : '#424242'), [theme])
@@ -102,13 +102,13 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       <Image image={job} x={leftRectWidth / 2 - 40} y={810} width={80} height={80} />
 
       {/* 칭호 */}
-      <Text width={leftRectWidth} x={0} y={900} text={config.title} align="center" fontFamily={fontFamily} fontSize={24} fill={'#b3b3b3'} />
+      <Text width={leftRectWidth} x={0} y={900} text={config.title} align="center" fontFamily={bodyFontFamily} fontSize={24} fill={'#b3b3b3'} />
 
       {/* 이름 */}
-      <Text width={leftRectWidth} x={0} y={940} text={config.name} align="center" fontFamily={fontFamily} fontSize={48} fill={'white'} />
+      <Text width={leftRectWidth} x={0} y={940} text={config.name} align="center" fontFamily={bodyFontFamily} fontSize={48} fill={'white'} />
 
       {/* 서버 */}
-      <Text width={leftRectWidth} x={0} y={990} text={config.server} align="center" fontFamily={fontFamily} fontSize={36} fill={'#8b8b8b'} />
+      <Text width={leftRectWidth} x={0} y={990} text={config.server} align="center" fontFamily={bodyFontFamily} fontSize={36} fill={'#8b8b8b'} />
     </>
   )
 
@@ -142,7 +142,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     <>
       {/* 총사령부 아이콘 */}
       <Image image={grade} x={leftRectWidth + 57} y={30} width={80} height={80} />
-      <Text x={leftRectWidth + 145} y={58} text={`${config.company} ${config.grade}`} fontFamily={fontFamily} fontSize={24} fill={highlightTextColor} />
+      <Text x={leftRectWidth + 145} y={58} text={`${config.company} ${config.grade}`} fontFamily={bodyFontFamily} fontSize={24} fill={highlightTextColor} />
     </>
   )
 
@@ -164,15 +164,14 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     <>
       {/* 에우레카 */}
       <LevelIcon iconPath="eureka" level={eurekaLevel} theme={theme} x={fieldOperationsStartX} y={fieldOperationsStartY} width={fieldOperationsIconSize} height={fieldOperationsIconSize} />
-      <Text text={eurekaLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={eurekaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={fontFamily} />
+      <Text text={eurekaLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={eurekaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={bodyFontFamily} />
 
       {/* 보즈야 아이콘 */}
       <LevelIcon iconPath="bozja" level={bozjaLevel} theme={theme} x={fieldOperationsStartX + fieldOperationsWidth} y={fieldOperationsStartY} width={fieldOperationsIconSize} height={fieldOperationsIconSize} />
-      <Text text={bozjaLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsWidth + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={bozjaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={fontFamily} />
-
+      <Text text={bozjaLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsWidth + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={bozjaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={bodyFontFamily} />
       {/* 초승달 섬 */}
       <LevelIcon iconPath="occult" level={occultLevel} theme={theme} x={fieldOperationsStartX + fieldOperationsWidth * 2 - 2} y={fieldOperationsStartY - 2} width={fieldOperationsIconSize + 4} height={fieldOperationsIconSize + 4} />
-      <Text text={occultLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsWidth * 2 + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={occultLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={fontFamily} />
+      <Text text={occultLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsWidth * 2 + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={occultLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={bodyFontFamily} />
     </>
   )
 
@@ -243,7 +242,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       {expansion && <Image image={expansion} x={1310 - (105 * expansion.width) / expansion.height} y={215} height={105} width={(105 * expansion.width) / expansion.height} />}
 
       {/* 메인 퀘스트 진행도 */}
-      <Text x={600} y={265} text={`${config.progress} ${config.expansionOngoing ? '진행 중' : '완료'}`} fontFamily={fontFamily} fontSize={48} fill={textColor} />
+      <Text x={600} y={265} text={`${config.progress} ${config.expansionOngoing ? '진행 중' : '완료'}`} fontFamily={bodyFontFamily} fontSize={48} fill={textColor} />
     </>
   )
 
@@ -254,10 +253,10 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
         <Arc key={index} angle={360 / config.playtime.length + 0.5} rotation={-90 + 360 * (index / config.playtime.length)} innerRadius={60} outerRadius={90} x={700} y={460} fill={play ? (index < 12 ? '#45c4f1' : '#f1a251') : '#d2d2d2'} />
       ))}
 
-      <Text text="0" x={625} y={450 - 40} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
-      <Text text="6" x={625 + 40} y={450} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
-      <Text text="12" x={625} y={450 + 40} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
-      <Text text="18" x={625 - 40} y={450} width={150} fontFamily={fontFamily} fontSize={25} fill={textColor} align="center" />
+      <Text text="0" x={625} y={450 - 40} width={150} fontFamily={bodyFontFamily} fontSize={25} fill={textColor} align="center" />
+      <Text text="6" x={625 + 40} y={450} width={150} fontFamily={bodyFontFamily} fontSize={25} fill={textColor} align="center" />
+      <Text text="12" x={625} y={450 + 40} width={150} fontFamily={bodyFontFamily} fontSize={25} fill={textColor} align="center" />
+      <Text text="18" x={625 - 40} y={450} width={150} fontFamily={bodyFontFamily} fontSize={25} fill={textColor} align="center" />
     </>
   )
 
@@ -276,31 +275,31 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     <>
       {/* 좋아요 */}
       <Image image={like} x={620} y={620} height={70} width={70} />
-      <Text x={620 + 100} y={620 + 12} text={config.like} fontFamily={fontFamily} fontSize={42} fill={textColor} />
+      <Text x={620 + 100} y={620 + 12} text={config.like} fontFamily={bodyFontFamily} fontSize={42} fill={textColor} />
 
       {/* 싫어요 */}
       <Image image={dislike} x={620} y={770} height={70} width={70} />
-      <Text x={620 + 100} y={770 + 12} text={config.dislike} fontFamily={fontFamily} fontSize={42} fill={textColor} />
+      <Text x={620 + 100} y={770 + 12} text={config.dislike} fontFamily={bodyFontFamily} fontSize={42} fill={textColor} />
     </>
   )
 
   const mastodon = (
     <>
       {/* 마스토돈 계정명 */}
-      <Text x={rightSeparatorX + 22} y={225} text={config.mastodonName} fontFamily={fontFamily} fontSize={48} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={225} text={config.mastodonName} fontFamily={bodyFontFamily} fontSize={48} fill={textColor} />
 
       {/* 마스토돈 핸들 */}
-      <Text x={rightSeparatorX + 22} y={280} text={config.handle} fontFamily={fontFamily} fontSize={36} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={280} text={config.handle} fontFamily={bodyFontFamily} fontSize={36} fill={textColor} />
 
       {/* 마스토돈 주 장르 레이블 */}
       <Text x={rightSeparatorX + 22} y={350} text="MAIN" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 주 장르 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={390} text={config.mastodonMain} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={390} text={config.mastodonMain} fontFamily={bodyFontFamily} fontSize={30} fill={textColor} />
 
       {/* 마스토돈 서브 장르 레이블 */}
       <Text x={rightSeparatorX + 22} y={440} text="ETC" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 서브 장르 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={480} text={config.mastodonSub} fontFamily={fontFamily} fontSize={30} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={480} text={config.mastodonSub} fontFamily={bodyFontFamily} fontSize={30} fill={textColor} />
     </>
   )
 
@@ -309,17 +308,17 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       {/* 마스토돈 툿 성향 레이블 */}
       <Text x={rightSeparatorX + 22} y={575} text="툿 성향" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 툿 성향 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={615} text={config.orientations.length ? config.orientations.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={615} text={config.orientations.length ? config.orientations.join(' | ') : '-'} fontFamily={bodyFontFamily} fontSize={24} fill={textColor} />
 
       {/* 마스토돈 커플링 성향 레이블 */}
       <Text x={rightSeparatorX + 22} y={675} text="커플링 성향" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 커플링 성향 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={715} text={config.couplings.length ? config.couplings.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={715} text={config.couplings.length ? config.couplings.join(' | ') : '-'} fontFamily={bodyFontFamily} fontSize={24} fill={textColor} />
 
       {/* 마스토돈 기피 소재 레이블 */}
       <Text x={rightSeparatorX + 22} y={775} text="기피 소재" fontFamily={titleFontFamily} fontSize={30} fill={textColor} fontStyle="bold" />
       {/* 마스토돈 기피 소재 텍스트 */}
-      <Text x={rightSeparatorX + 22} y={815} text={config.avoids.length ? config.avoids.join(' | ') : '-'} fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text x={rightSeparatorX + 22} y={815} text={config.avoids.length ? config.avoids.join(' | ') : '-'} fontFamily={bodyFontFamily} fontSize={24} fill={textColor} />
     </>
   )
 
@@ -329,15 +328,15 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
   const comment = (
     <>
       {/* 한마디 */}
-      <Text x={leftRectWidth + 50} y={950} text="한마디" fontFamily={fontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
-      <Text x={leftRectWidth + 190} y={isMultiLine ? 932 : 952} width={1150} height={100} text={commentText} fontFamily={fontFamily} fontSize={isMultiLine ? 36 : 42} fill={textColor} lineHeight={isMultiLine ? 1.25 : undefined} />
+      <Text x={leftRectWidth + 50} y={950} text="한마디" fontFamily={titleFontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
+      <Text x={leftRectWidth + 190} y={isMultiLine ? 932 : 952} width={1150} height={100} text={commentText} fontFamily={bodyFontFamily} fontSize={isMultiLine ? 36 : 42} fill={textColor} lineHeight={isMultiLine ? 1.25 : undefined} />
     </>
   )
 
   const copyright = (
     <>
-      <Text width={1895} align="right" x={0} y={1026} text={`툿친소 시트 메이커 v${pkg.version} - ${pkg.homepage}`} fontFamily={fontFamily} fontSize={20} fill={textColor} opacity={0.5} />
-      <Text width={1895} align="right" x={0} y={1050} text={`©2010-${new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.`} fontFamily={fontFamily} fontSize={20} fill={textColor} opacity={0.5} />
+      <Text width={1895} align="right" x={0} y={1026} text={`툿친소 시트 메이커 v${pkg.version} - ${pkg.homepage}`} fontFamily={bodyFontFamily} fontSize={20} fill={textColor} opacity={0.5} />
+      <Text width={1895} align="right" x={0} y={1050} text={`©2010-${new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.`} fontFamily={bodyFontFamily} fontSize={20} fill={textColor} opacity={0.5} />
     </>
   )
 
