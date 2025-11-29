@@ -65,8 +65,8 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           </Space.Compact>
         </Form.Item>
 
-        <Form.Item label="한마디">
-          <Input.TextArea style={{ height: 80 }} value={config.comment} onChange={(e) => setConfig({ ...config, comment: e.target.value })} placeholder="한마디" />
+        <Form.Item label="한마디" tooltip="줄바꿈을 넣으면 글자 크기가 작아집니다.">
+          <Input.TextArea rows={2} value={config.comment} onChange={(e) => setConfig({ ...config, comment: e.target.value })} placeholder="한마디" />
         </Form.Item>
       </Space>
     ),

@@ -7,6 +7,7 @@ import { Arc, Image, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import { Stage as StageRef } from 'konva/lib/Stage'
 import useImage from 'use-image'
 
+import pkg from '../../package.json'
 import { Config, jobsByRole } from '../common'
 
 import JobIcon from './canvas/JobIcon'
@@ -311,14 +312,14 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     <>
       {/* 한마디 */}
       <Text x={leftRectWidth + 50} y={950} text="한마디" fontFamily={fontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
-      <Text x={leftRectWidth + 190} y={isMultiLine ? 932 : 952} width={1150} text={commentText} fontFamily={fontFamily} fontSize={isMultiLine ? 36 : 42} fill={textColor} lineHeight={isMultiLine ? 1.25 : undefined} />
+      <Text x={leftRectWidth + 190} y={isMultiLine ? 932 : 952} width={1150} height={100} text={commentText} fontFamily={fontFamily} fontSize={isMultiLine ? 36 : 42} fill={textColor} lineHeight={isMultiLine ? 1.25 : undefined} />
     </>
   )
 
   const copyright = (
     <>
-      <Text width={1895} align="right" x={0} y={1005} text="https://chalkpe.github.io/toot-friends/" fontFamily={fontFamily} fontSize={24} fill={textColor} opacity={0.5} />
-      <Text width={1895} align="right" x={0} y={1040} text={`©2010-${new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.`} fontFamily={fontFamily} fontSize={24} fill={textColor} opacity={0.5} />
+      <Text width={1895} align="right" x={0} y={1026} text={`툿친소 시트 메이커 v${pkg.version} - ${pkg.homepage}`} fontFamily={fontFamily} fontSize={20} fill={textColor} opacity={0.5} />
+      <Text width={1895} align="right" x={0} y={1050} text={`©2010-${new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.`} fontFamily={fontFamily} fontSize={20} fill={textColor} opacity={0.5} />
     </>
   )
 
