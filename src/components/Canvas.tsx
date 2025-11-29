@@ -32,7 +32,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
 
   const [imageOffset, setImageOffset] = useState({ x: 0, y: 0 })
 
-  const [userImage] = useImage(config.image, 'anonymous')
+  const [userImage] = useImage(config.image ?? '', 'anonymous')
   const [backgroundImage] = useImage(`./${config.color}.png`, 'anonymous')
 
   const [job] = useImage(`./icons/${config.job}.png`, 'anonymous')
@@ -146,15 +146,33 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     </>
   )
 
-  const bozjaEureka = (
+  const eurekaLevel = config.eurekaLevel ?? 0
+  const bozjaLevel = config.bozjaLevel ?? 0
+  const occultLevel = config.occultLevel ?? 0
+
+  const fieldOperationsStartX = leftRectWidth + 60
+  const fieldOperationsStartY = 120
+  const fieldOperationsIconStartY = 124
+
+  const fieldOperationsWidth = 72
+  const fieldOperationsGap = 5
+
+  const fieldOperationsIconSize = 30
+  const fieldOperationsFontSize = 24
+
+  const fieldOperations = (
     <>
       {/* 에우레카 */}
-      <LevelIcon iconPath="eureka" level={config.eurekaLevel ?? 0} theme={theme} x={leftRectWidth + 60} y={110} width={40} height={40} />
-      <Text text={config.eurekaLevel?.toString() ?? '0'} x={leftRectWidth + 60 + 45} y={110 + 14} fill={config.eurekaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
+      <LevelIcon iconPath="eureka" level={eurekaLevel} theme={theme} x={fieldOperationsStartX} y={fieldOperationsStartY} width={fieldOperationsIconSize} height={fieldOperationsIconSize} />
+      <Text text={eurekaLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={eurekaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={fontFamily} />
 
       {/* 보즈야 아이콘 */}
-      <LevelIcon iconPath="bozja" level={config.bozjaLevel ?? 0} theme={theme} x={leftRectWidth + 150} y={110} width={40} height={40} />
-      <Text text={config.bozjaLevel?.toString() ?? '0'} x={leftRectWidth + 150 + 45} y={110 + 14} fill={config.bozjaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={30} fontFamily={fontFamily} />
+      <LevelIcon iconPath="bozja" level={bozjaLevel} theme={theme} x={fieldOperationsStartX + fieldOperationsWidth} y={fieldOperationsStartY} width={fieldOperationsIconSize} height={fieldOperationsIconSize} />
+      <Text text={bozjaLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsWidth + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={bozjaLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={fontFamily} />
+
+      {/* 초승달 섬 */}
+      <LevelIcon iconPath="occult" level={occultLevel} theme={theme} x={fieldOperationsStartX + fieldOperationsWidth * 2 - 2} y={fieldOperationsStartY - 2} width={fieldOperationsIconSize + 4} height={fieldOperationsIconSize + 4} />
+      <Text text={occultLevel.toString()} x={fieldOperationsStartX + fieldOperationsGap + fieldOperationsWidth * 2 + fieldOperationsIconSize} y={fieldOperationsIconStartY} fill={occultLevel === 0 ? '#5a5a5a' : '#cccccc'} fontSize={fieldOperationsFontSize} fontFamily={fontFamily} />
     </>
   )
 
@@ -354,7 +372,7 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
           {comment}
           {copyright}
           {freeCompany}
-          {bozjaEureka}
+          {fieldOperations}
 
           {/* 왼쪽 이미지 드래그시키는 녀석 */}
           <Rect

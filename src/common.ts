@@ -5,7 +5,7 @@ export type Config = {
   name: string
   server: string
   title: string
-  image: any
+  image: string | null
   scale: number
   job: string | undefined
   jobs: string[]
@@ -16,6 +16,7 @@ export type Config = {
   grade: string
   eurekaLevel: number | undefined
   bozjaLevel: number | undefined
+  occultLevel: number | undefined
   like: string
   dislike: string
   mastodonName: string
@@ -48,6 +49,7 @@ export const defaultConfig: Config = {
   grade: '',
   eurekaLevel: undefined,
   bozjaLevel: undefined,
+  occultLevel: undefined,
   like: '',
   dislike: '',
   mastodonName: '',

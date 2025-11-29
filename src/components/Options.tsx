@@ -31,7 +31,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
             onChange={(info) => {
               if (info.fileList.length) {
                 const reader = new FileReader()
-                reader.addEventListener('load', () => setConfig({ ...config, image: reader.result }))
+                reader.addEventListener('load', () => setConfig({ ...config, image: reader.result?.toString() ?? null }))
                 reader.readAsDataURL(info.file as RcFile)
               }
             }}
@@ -164,6 +164,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
           <Space wrap>
             <InputNumber style={{ width: 150 }} value={config.eurekaLevel} onChange={(eurekaLevel) => setConfig({ ...config, eurekaLevel: eurekaLevel ?? undefined })} placeholder="에우레카 (최대 60)" min={0} max={60} />
             <InputNumber style={{ width: 150 }} value={config.bozjaLevel} onChange={(bozjaLevel) => setConfig({ ...config, bozjaLevel: bozjaLevel ?? undefined })} placeholder="보즈야 (최대 25)" min={0} max={25} />
+            <InputNumber style={{ width: 150 }} value={config.occultLevel} onChange={(occultLevel) => setConfig({ ...config, occultLevel: occultLevel ?? undefined })} placeholder="초승달 섬 (최대 20)" min={0} max={20} />
           </Space>
         </Form.Item>
 

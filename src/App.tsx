@@ -13,7 +13,7 @@ function App() {
   const [config, setConfig] = useState<Config>(conf ? JSON.parse(conf) : defaultConfig)
 
   useEffect(() => {
-    const { image, ...rest } = config
+    const rest = { ...config, image: null }
     localStorage.setItem('config', JSON.stringify(rest))
   }, [config])
   

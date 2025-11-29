@@ -18,7 +18,7 @@ interface JobIconProps extends Omit<ComponentProps<typeof Image>, 'image'> {
   colorType: keyof typeof colors
 }
 
-const JobIcon: FC<JobIconProps> = ({ iconPath, colorType, rgb, ...props }) => {
+const JobIcon: FC<JobIconProps> = ({ iconPath, colorType, ...props }) => {
   const ref = useRef<Konva.Image>(null)
   const [icon] = useImage(`./icons/${iconPath}.svg`, 'anonymous')
 
