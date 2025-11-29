@@ -304,18 +304,21 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
     </>
   )
 
+  const commentText = config.comment || '-'
+  const isMultiLine = commentText.split('\n').length >= 2
+
   const comment = (
     <>
       {/* 한마디 */}
       <Text x={leftRectWidth + 50} y={950} text="한마디" fontFamily={fontFamily} fontSize={48} fill={textColor} fontStyle="bold" />
-      <Text x={leftRectWidth + 190} y={940} width={1150} text={config.comment || '-'} fontFamily={fontFamily} fontSize={36} fill={textColor} />
+      <Text x={leftRectWidth + 190} y={isMultiLine ? 932 : 952} width={1150} text={commentText} fontFamily={fontFamily} fontSize={isMultiLine ? 36 : 42} fill={textColor} lineHeight={isMultiLine ? 1.25 : undefined} />
     </>
   )
 
   const copyright = (
     <>
-      <Text width={1895} align="right" x={0} y={1005} text="https://chalkpe.github.io/toot-friends/" fontFamily={fontFamily} fontSize={24} fill={textColor} />
-      <Text width={1895} align="right" x={0} y={1040} text={`©2010-${new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.`} fontFamily={fontFamily} fontSize={24} fill={textColor} />
+      <Text width={1895} align="right" x={0} y={1005} text="https://chalkpe.github.io/toot-friends/" fontFamily={fontFamily} fontSize={24} fill={textColor} opacity={0.5} />
+      <Text width={1895} align="right" x={0} y={1040} text={`©2010-${new Date().getFullYear()} SQUARE ENIX CO., LTD. All Rights Reserved. Published in Korea by Actoz Soft CO., LTD.`} fontFamily={fontFamily} fontSize={24} fill={textColor} opacity={0.5} />
     </>
   )
 
