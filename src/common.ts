@@ -131,6 +131,7 @@ export const expansions = [
       { label: 'v7.1 미지와의 해후', value: 'v7.1' },
       { label: 'v7.2 영원의 탐구자', value: 'v7.2' },
       { label: 'v7.3 내일을 향한 이정표', value: 'v7.3' },
+      { label: 'v7.4 안개 속의 이상향', value: 'v7.4' },
     ],
   },
 ]
