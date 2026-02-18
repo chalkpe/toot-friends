@@ -186,6 +186,48 @@ export const jobsByRole = {
   gatherer: ['miner', 'botanist', 'fisher'],
 }
 
+export const jobNames = {
+  paladin: '나이트',
+  warrior: '전사',
+  darkknight: '암흑기사',
+  gunbreaker: '건브레이커',
+
+  whitemage: '백마도사',
+  scholar: '학자',
+  astrologian: '점성술사',
+  sage: '현자',
+
+  monk: '몽크',
+  dragoon: '용기사',
+  ninja: '닌자',
+  samurai: '사무라이',
+  reaper: '리퍼',
+  viper: '바이퍼',
+
+  bard: '음유시인',
+  machinist: '기공사',
+  dancer: '무도가',
+
+  blackmage: '흑마도사',
+  summoner: '소환사',
+  redmage: '적마도사',
+  pictomancer: '픽토맨서',
+  bluemage: '청마도사',
+
+  carpenter: '목수',
+  blacksmith: '대장장이',
+  armorer: '갑주제작사',
+  goldsmith: '보석공예가',
+  leatherworker: '가죽공예가',
+  weaver: '재봉사',
+  alchemist: '연금술사',
+  culinarian: '요리사',
+
+  miner: '광부',
+  botanist: '원예가',
+  fisher: '어부',
+}
+
 export const servers = [
   {
     label: 'Korea',

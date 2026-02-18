@@ -13,6 +13,8 @@ import { Config, jobsByRole } from '../common'
 import JobIcon from './canvas/JobIcon'
 import PlaystyleIcon from './canvas/PlaystyleIcon'
 import LevelIcon from './canvas/LevelIcon'
+
+import Alt from './Alt'
 import Thanks from './Thanks'
 
 const sceneWidth = 1920
@@ -354,9 +356,12 @@ const Canvas: FC<CanvasProps> = ({ config }) => {
       }
       bodyStyle={{ padding: 0 }}
       extra={
-        <Button type="text" icon={<DownloadOutlined />} onClick={download}>
-          다운로드
-        </Button>
+        <Space>
+          <Alt config={config} />
+          <Button type="text" icon={<DownloadOutlined />} onClick={download}>
+            다운로드
+          </Button>
+        </Space>
       }
     >
       <Stage ref={ref} width={sceneWidth} height={sceneHeight} style={{ borderBottomLeftRadius: 8, borderBottomRightRadius: 8, overflow: 'hidden' }}>

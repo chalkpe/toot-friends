@@ -208,7 +208,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
       <Space direction="vertical">
         <Form.Item label="정보">
           <Space wrap>
-            <Input style={{ width: 300 }} value={config.mastodonName} onChange={(e) => setConfig({ ...config, mastodonName: e.target.value })} placeholder="마스토돈 계정명" />
+            <Input style={{ width: 300 }} value={config.mastodonName} onChange={(e) => setConfig({ ...config, mastodonName: e.target.value })} placeholder="연합우주 계정명" />
             <Input style={{ width: 300 }} value={config.handle} onChange={(e) => setConfig({ ...config, handle: e.target.value })} placeholder="핸들 (예시: @chalk@chalk.moe)" />
           </Space>
         </Form.Item>
@@ -259,7 +259,7 @@ const Options: FC<OptionsProps> = ({ config, setConfig }) => {
     { key: 'basic', tab: '기본' },
     { key: 'theme', tab: '테마' },
     { key: 'ffxiv', tab: '파판14' },
-    { key: 'mastodon', tab: '마스토돈' },
+    { key: 'mastodon', tab: '연합우주' },
   ]
 
   return (
