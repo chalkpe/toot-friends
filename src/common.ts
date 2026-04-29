@@ -132,6 +132,7 @@ export const expansions = [
       { label: 'v7.2 영원의 탐구자', value: 'v7.2' },
       { label: 'v7.3 내일을 향한 이정표', value: 'v7.3' },
       { label: 'v7.4 안개 속 이상향', value: 'v7.4' },
+      { label: 'v7.5 저 너머로 이르는 길', value: 'v7.5' },
     ],
   },
 ]
